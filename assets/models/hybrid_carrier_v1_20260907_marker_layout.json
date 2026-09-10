@@ -1,0 +1,98 @@
+{
+  "layout_id": "hybrid_carrier_v1_20260907",
+  "units": "m",
+  "aruco_dictionary": "DICT_6X6_50",
+  "generated_utc": "2026-09-09T08:26:52Z",
+  "source": {
+    "descriptor": "assets/models/hybrid_carrier_v1_20260907.json",
+    "carrier_id": "hybrid_carrier_v1_20260907",
+    "frame": "the carrier's CAD frame: origin on the seating socket sphere centre, which is also this rig's TCP"
+  },
+  "note": "anchor corners only. The painted facets carry pose too, but as point-to-line samples on boundaries rather than as corners, and a marker layout has no way to express one -- they enter through the carrier solve, not through this table.",
+  "markers": [
+    {
+      "id": 31,
+      "name": "anchor_yn",
+      "paste_quadrant": 3,
+      "size_m": 0.047240000000000004,
+      "corners_rig": [
+        [
+          0.097332137,
+          -0.066759201,
+          0.033355495
+        ],
+        [
+          0.058760836,
+          -0.047473558,
+          0.014069845000000001
+        ],
+        [
+          0.058760836,
+          -0.014069827,
+          0.047473562999999996
+        ],
+        [
+          0.097332137,
+          -0.03335547,
+          0.066759213
+        ]
+      ]
+    },
+    {
+      "id": 30,
+      "name": "anchor_yc",
+      "paste_quadrant": 3,
+      "size_m": 0.047240000000000004,
+      "corners_rig": [
+        [
+          0.143543361,
+          -0.023620000000000002,
+          0.071300533
+        ],
+        [
+          0.143543361,
+          0.023620000000000002,
+          0.071300533
+        ],
+        [
+          0.184454401,
+          0.023620000000000002,
+          0.047680533
+        ],
+        [
+          0.184454401,
+          -0.023620000000000002,
+          0.047680533
+        ]
+      ]
+    },
+    {
+      "id": 32,
+      "name": "anchor_yp",
+      "paste_quadrant": 2,
+      "size_m": 0.047240000000000004,
+      "corners_rig": [
+        [
+          0.097332137,
+          0.03335547,
+          0.066759213
+        ],
+        [
+          0.058760836,
+          0.014069827,
+          0.047473562999999996
+        ],
+        [
+          0.058760836,
+          0.047473558,
+          0.014069845000000001
+        ],
+        [
+          0.097332137,
+          0.066759201,
+          0.033355495
+        ]
+      ]
+    }
+  ]
+}

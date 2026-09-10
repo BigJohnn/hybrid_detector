@@ -1,0 +1,65 @@
+{
+  "schema": "marker_rig_to_tcp_calibration/v1",
+  "calibration_id": "cad_hybrid_carrier_v1_20260907_socket_centre",
+  "created_utc": "2026-09-09T08:26:52Z",
+  "validated": false,
+  "cubes": {
+    "carrier": {
+      "device_id": "hybrid_carrier_v1_20260907",
+      "T_rig_tcp_is_T_cube_tcp": "same field, different rig: the tracked frame here is the carrier's CAD frame",
+      "T_cube_tcp": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "tcp_link": "carrier_socket_centre (the seated ball centre; no URDF chain involved)",
+      "translation_sigma_mm": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "rotation_sigma_deg": 1.0,
+      "translation_source": "CAD: the seating socket sphere centre sits on the part-studio origin (12.68 mm radius, STEP face #1318), so the rig frame is the TCP frame and the translation is zero by construction, not by fit",
+      "rotation_source": "convention, not measurement: z_tcp = z_rig because the socket opens along -z_rig and a ball seats from that side, which is the gripper's body->TCP->table direction -z_tcp; x_tcp = x_rig because the boom is the only distinguished direction left in the plane. A rig with no fingers has no measured roll to inherit.",
+      "mount": {
+        "socket_sphere_radius_mm": 12.68,
+        "socket_centre_offset_from_origin_mm": 0.0,
+        "socket_centre_beyond_tcp_closed_mm": 0.0,
+        "note": "no gripper in this chain. The cube bundles carry this field because a seated ball sits some distance beyond the closed fingers; here the seated ball centre is the TCP itself, so the offset is zero by definition rather than by a caliper."
+      },
+      "source_descriptor": {
+        "path": "assets/models/hybrid_carrier_v1_20260907.json",
+        "sha256": "7efe6a91666e3eb3686c82c2b74d90f4200b78db1837da13eca22f2f85b56559",
+        "carrier_id": "hybrid_carrier_v1_20260907",
+        "step_file": "rig0907_rgb.step",
+        "step_sha256": "468e3bc917aab5db0fe890017927a5edf9ed27489b5301afacf8fa22f10fe483"
+      },
+      "open_items": [
+        "the rotation is a convention pinned to the seating direction and the boom, not a measurement; pin it deliberately before mixing carrier episodes with cube-labelled ones",
+        "the 0.7 mm sigma is the built part's body scale (-4541 ppm over a 134.8 mm lever arm), measured against CAD on one capture and confounded with the extrinsics' own scale; a second capture on a different day separates them",
+        "remove/reseat repeatability of the socket on its ball has not been captured"
+      ]
+    }
+  }
+}

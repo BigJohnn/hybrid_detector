@@ -1,0 +1,40 @@
+{
+  "schema": "hybrid_detector/camera/v1",
+  "camera_name": "example_cam14",
+  "camera_serial": "example",
+  "image_width": 1920,
+  "image_height": 1080,
+  "camera_matrix": [
+    [
+      1003.8678575185722,
+      0.0,
+      962.7999454840877
+    ],
+    [
+      0.0,
+      1004.0866677848273,
+      535.9075446152555
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "dist_coeffs": [
+    [
+      -0.07238401278126634,
+      -0.007322931587596331,
+      0.004369144955575637,
+      -0.001481321419762347
+    ]
+  ],
+  "model": "opencv_fisheye",
+  "T_base_cam": [
+    [1.0, 0.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "note": "Fisheye intrinsics distributed only to make the included example image reproducible."
+}

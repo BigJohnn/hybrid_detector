@@ -1,0 +1,113 @@
+{
+ "rule": "2 mm centered black vector stroke clipped to each CAD facet = exactly 1 mm inward black band on each straight edge",
+ "colors": {
+  "R": "#E60012",
+  "G": "#00A651",
+  "B": "#0057B8"
+ },
+ "anchors": {
+  "47": 30,
+  "72": 31,
+  "73": 32
+ },
+ "color_faces": {
+  "35": "R",
+  "36": "R",
+  "37": "G",
+  "38": "G",
+  "39": "R",
+  "40": "B",
+  "42": "G",
+  "43": "R",
+  "48": "G",
+  "50": "G",
+  "51": "B",
+  "52": "B",
+  "53": "R",
+  "54": "B"
+ },
+ "not_applied": [
+  52
+ ],
+ "not_applied_note": "printed on the sheet (as P12) but not applied and not solved from: STEP face #1345 is bounded by a FACE_BOUND holding an R7.5 arc, so it has no polygon, the builder drops it, and the printed pattern bridges the arc with a straight edge that would overhang the notch by up to 7.5 mm. Indices are into ADVANCED_FACE file order, like color_faces. The sheet keeps its P01..P14 numbering so the printed pages still match this file.",
+ "pages": 2,
+ "mirror_pairs_forced_different": [
+  [
+   36,
+   38
+  ],
+  [
+   37,
+   39
+  ],
+  [
+   42,
+   54
+  ],
+  [
+   43,
+   50
+  ],
+  [
+   48,
+   53
+  ]
+ ],
+ "sheet_outline_mirror": {
+  "finding": "Every coloured outline on rig0907_patterns_RGB_exact1mm_A4.pdf is mirrored. The sheet's ArUco patterns are not -- they decode as ids 30/31/32 straight off the page -- so the error hides: it is invisible on the six decals whose faces are mirror-symmetric (P01 P06 P11 P12) and shows up on the other ten only as the twin's outline in this decal's ink.",
+  "evidence": "Each printed outline best-fits exactly one CAD face to 0.00 mm, and it is never the face the sheet labels it for -- it is that face's mirror twin. Forced onto the face it names, a decal is off by up to 6.24 mm at a corner (P07/P14 6.24, P09/P13 5.17, P03/P05 3.90, P02/P04 1.44, P08/P10 0.21).",
+  "resolution": "The sheet is not reprinted; each decal is applied to the face its outline actually fits, which is the twin. That lands every decal to 0.00 mm and makes the paint scheme the mirror of the 09-07 design -- same chirality (0.734), same mirror_pairs_y ([]), same 31/31 unbiased edges. color_faces above is therefore the as-built assignment, not the sheet's printed one.",
+  "decal_applied_to_face_index": {
+   "35": "P01",
+   "36": "P04",
+   "37": "P05",
+   "38": "P02",
+   "39": "P03",
+   "40": "P06",
+   "42": "P14",
+   "43": "P10",
+   "48": "P13",
+   "50": "P08",
+   "51": "P11",
+   "53": "P09",
+   "54": "P07"
+  },
+  "colour_before_swap": {
+   "35": "R",
+   "36": "G",
+   "37": "R",
+   "38": "R",
+   "39": "G",
+   "40": "B",
+   "42": "B",
+   "43": "G",
+   "48": "R",
+   "50": "R",
+   "51": "B",
+   "52": "B",
+   "53": "G",
+   "54": "G"
+  },
+  "checked": "2026-09-09"
+ },
+ "paste_quadrants": {
+  "measured": {
+   "30": 3,
+   "31": 3,
+   "32": 2
+  },
+  "meaning": "90 deg steps of the printed sticker on its 62 mm pad, as actually applied. Passed to build_hybrid_carrier_model as --paste-quadrant ID=Q.",
+  "source": "thor_gmsl2_10ch_v1_20260909_141151, episode 1, 41 frames at stride 30, 7 cameras. The detector enumerates all four rotations when this is unset; the vote over 508 anchor observations was 30: {3: 155, 2: 1}, 31: {3: 175, 0: 3}, 32: {2: 178, 3: 1, 1: 5}.",
+  "why_it_has_to_be_written_down": "The ~2% of observations that picked another rotation did not fail -- each returned a confident single-camera pose tens of millimetres out, and the joint solve accepted it. Pinning the rotation removes the search (about 4x faster) and the failure mode with it.",
+  "checked": "2026-09-09"
+ },
+ "anchor_marker_size": {
+  "measured_mm": 47.24,
+  "nominal_mm": 48.0,
+  "scale_ppm": -15848,
+  "why_it_is_not_on_this_sheet": "the ArUco decals are not part of rig0907_patterns_RGB_exact1mm_A4.pdf, which carries only the 14 coloured facet patterns. Nothing in the repo ever recorded what size they were printed at, so 48 mm was an unverified builder argument.",
+  "measurement": "hybrid_detector.detector.estimate_build_scale over the 2026-09-09 seven-camera bench capture: one scale on the distances between anchors (the printed body) and a second on each sticker about its own centre (the decal). 82 frames at stride 30 gave body -4102 ppm and sticker -15848 ppm, the latter 10x its own per-frame sigma.",
+  "confirmation": "rebuilding at 47.24 mm and re-solving 400 consecutive frames leaves a residual sticker scale of -312 ppm (0.015 mm) and halves the per-camera dispersion against the joint pose at every anchor count: all views 6.58 -> 2.98 mm p50, three-anchor views 4.62 -> 1.91 mm.",
+  "what_it_was_costing": "a sticker 1.58% smaller than the model puts a single-anchor PnP 1.58% too far away -- 32 mm at 2 m, which is exactly the size of the one-anchor outliers the 09-09 analysis attributed to single-anchor geometry."
+ }
+}

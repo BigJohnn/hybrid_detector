@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hybrid-detector"
+version = "0.1.0"
+description = "CAD-constrained 6-DoF pose estimation from fiducial anchors and coloured facet boundaries"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary - license pending" }
+authors = [{ name = "TBD before publication" }]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "opencv-contrib-python>=4.8",
+  "Pillow>=9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "ruff>=0.6",
+  "build>=1.2",
+]
+
+[project.scripts]
+hybrid-detect = "hybrid_detector.cli.detect:main"
+hybrid-build-model = "hybrid_detector.cli.build_model:main"
+hybrid-paint-step = "hybrid_detector.cli.paint_step:main"
+hybrid-export-layout = "hybrid_detector.cli.export_layout:main"
+hybrid-carrier-tcp = "hybrid_detector.cli.carrier_tcp:main"
+hybrid-compare-targets = "hybrid_detector.cli.compare_targets:main"
+hybrid-render-install-guide = "hybrid_detector.cli.render_install_guide:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]  # Diagnostic prose and equations are intentionally not hard-wrapped.

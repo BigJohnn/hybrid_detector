@@ -1,0 +1,5237 @@
+{
+  "schema": "hybrid_carrier_cad/v1",
+  "carrier_id": "hybrid_carrier_v1_20260907",
+  "generated_utc": "2026-09-09T08:26:52Z",
+  "units": "mm",
+  "frame": "STEP part-studio frame, not recentred; the pivot socket sphere centre sits on the origin, so a pivot fit on a track built from this model must return p_rig = 0",
+  "pivot": {
+    "socket_sphere_centre_mm": [
+      -0.0,
+      0.0,
+      0.0
+    ],
+    "socket_sphere_radius_mm": 12.68,
+    "socket_face_entity_id": 1318,
+    "offset_from_origin_mm": 0.0,
+    "note": "the socket centre is the rig's TCP: it is the one point on the rig whose position is fixed by a seated ball rather than by the paint"
+  },
+  "source": {
+    "step_file": "rig0907_rgb.step",
+    "sha256": "468e3bc917aab5db0fe890017927a5edf9ed27489b5301afacf8fa22f10fe483",
+    "part_name": "marker_rig_mount_test Copy 1 - Part 1",
+    "step_timestamp": "2026-09-07T08:52:40Z",
+    "originating_system": "  ",
+    "native_units": "mm",
+    "body_colour_rgb": [
+      0.615686,
+      0.811765,
+      0.929412
+    ],
+    "num_faces": 74,
+    "reader": "hybrid_detector.step (STEP entity ids kept attached to geometry)"
+  },
+  "print": {
+    "body": "unpainted faces stay bare; they are the light reference the facets sit against",
+    "facet_fill": "solid paint, one colour per facet",
+    "repaint": {},
+    "repaint_note": "colours the print carries that the STEP does not; each facet keeps its STEP colour under step_colour so the CAD and the print can be diffed",
+    "border": {
+      "width_mm": 2.0,
+      "alignment": "centred",
+      "assumed": true,
+      "note": "not recorded in the STEP. Where two painted facets meet, the two strokes merge into one band whose centre is the CAD edge for any alignment, so those edges stay unbiased even if this number is wrong; elsewhere the value sets the offset the detector removes, and detect_hybrid_carrier reports the band width it actually measured so this can be checked against the print"
+    },
+    "anchor": {
+      "layout": "white ArUco sticker centred on each unpainted pad, quiet zone left white",
+      "sticker_covers_pad": false,
+      "note": "False means the sticker is marker-sized and the rest of the 60 mm pad stays bare, so a facet's stroke can wrap onto the pad rim and the pad-to-facet edges stay self-centring. True means the sticker covers the whole pad, the stroke stops at the edge, and those edges pick up half a stroke of bias. The stroke lands about 6 mm outside the marker either way, so it never touches the quiet zone"
+    }
+  },
+  "anchors": [
+    {
+      "name": "anchor_yn",
+      "marker_id": 31,
+      "dictionary": "DICT_6X6_50",
+      "face_entity_id": 1365,
+      "pad_corners": [
+        [
+          52.735091,
+          -49.679135,
+          5.838525
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          52.735091,
+          -5.838506,
+          49.679137
+        ]
+      ],
+      "marker_corners": [
+        [
+          58.760836,
+          -47.473558,
+          14.069845
+        ],
+        [
+          58.760836,
+          -14.069827,
+          47.473563
+        ],
+        [
+          97.332137,
+          -33.35547,
+          66.759213
+        ],
+        [
+          97.332137,
+          -66.759201,
+          33.355495
+        ]
+      ],
+      "corner_order": "ArUco order: clockwise about the outward normal",
+      "normal": [
+        -0.57735,
+        -0.57735,
+        0.57735
+      ],
+      "centre": [
+        78.046486,
+        -40.414514,
+        40.414529
+      ],
+      "pad_size": 62.0,
+      "marker_size": 47.24,
+      "quiet_zone": 7.38,
+      "paste_quadrant": 3,
+      "paste_quadrant_note": "physical sticker rotation, measured on the built rig"
+    },
+    {
+      "name": "anchor_yc",
+      "marker_id": 30,
+      "dictionary": "DICT_6X6_50",
+      "face_entity_id": 1340,
+      "pad_corners": [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      "marker_corners": [
+        [
+          143.543361,
+          23.62,
+          71.300533
+        ],
+        [
+          184.454401,
+          23.62,
+          47.680533
+        ],
+        [
+          184.454401,
+          -23.62,
+          47.680533
+        ],
+        [
+          143.543361,
+          -23.62,
+          71.300533
+        ]
+      ],
+      "corner_order": "ArUco order: clockwise about the outward normal",
+      "normal": [
+        0.5,
+        0.0,
+        0.866025
+      ],
+      "centre": [
+        163.998881,
+        0.0,
+        59.490533
+      ],
+      "pad_size": 62.0,
+      "marker_size": 47.24,
+      "quiet_zone": 7.38,
+      "paste_quadrant": 3,
+      "paste_quadrant_note": "physical sticker rotation, measured on the built rig"
+    },
+    {
+      "name": "anchor_yp",
+      "marker_id": 32,
+      "dictionary": "DICT_6X6_50",
+      "face_entity_id": 1366,
+      "pad_corners": [
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ],
+        [
+          52.735091,
+          5.838506,
+          49.679137
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ]
+      ],
+      "marker_corners": [
+        [
+          58.760836,
+          47.473558,
+          14.069845
+        ],
+        [
+          97.332137,
+          66.759201,
+          33.355495
+        ],
+        [
+          97.332137,
+          33.35547,
+          66.759213
+        ],
+        [
+          58.760836,
+          14.069827,
+          47.473563
+        ]
+      ],
+      "corner_order": "ArUco order: clockwise about the outward normal",
+      "normal": [
+        -0.57735,
+        0.57735,
+        0.57735
+      ],
+      "centre": [
+        78.046486,
+        40.414514,
+        40.414529
+      ],
+      "pad_size": 62.0,
+      "marker_size": 47.24,
+      "quiet_zone": 7.38,
+      "paste_quadrant": 2,
+      "paste_quadrant_note": "physical sticker rotation, measured on the built rig"
+    }
+  ],
+  "facets": [
+    {
+      "name": "red_pz",
+      "colour": "red",
+      "face_entity_id": 1328,
+      "polygon": [
+        [
+          52.735091,
+          5.838506,
+          49.679137
+        ],
+        [
+          52.735091,
+          -5.838506,
+          49.679137
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        -0.447214,
+        0.0,
+        0.894427
+      ],
+      "centroid": [
+        78.046486,
+        -0.0,
+        62.334835
+      ],
+      "area": 2093.469428,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "red",
+      "repainted": false
+    },
+    {
+      "name": "red_pz_yn",
+      "colour": "red",
+      "face_entity_id": 1329,
+      "polygon": [
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.414845,
+        -0.558224,
+        0.718533
+      ],
+      "centroid": [
+        160.71444,
+        -45.545955,
+        50.086126
+      ],
+      "area": 1630.456946,
+      "num_vertices": 3,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "red",
+      "repainted": false
+    },
+    {
+      "name": "green_px",
+      "colour": "green",
+      "face_entity_id": 1330,
+      "polygon": [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.698693,
+        -0.664696,
+        0.264589
+      ],
+      "centroid": [
+        177.471398,
+        -54.592285,
+        20.0395
+      ],
+      "area": 1952.79724,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "green",
+      "repainted": false
+    },
+    {
+      "name": "green_pz",
+      "colour": "green",
+      "face_entity_id": 1331,
+      "polygon": [
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.414845,
+        0.558224,
+        0.718533
+      ],
+      "centroid": [
+        160.71444,
+        45.545955,
+        50.086126
+      ],
+      "area": 1630.456946,
+      "num_vertices": 3,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "green",
+      "repainted": false
+    },
+    {
+      "name": "red_px",
+      "colour": "red",
+      "face_entity_id": 1332,
+      "polygon": [
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.698693,
+        0.664696,
+        0.264589
+      ],
+      "centroid": [
+        177.471398,
+        54.592285,
+        20.0395
+      ],
+      "area": 1952.79724,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "red",
+      "repainted": false
+    },
+    {
+      "name": "blue_px",
+      "colour": "blue",
+      "face_entity_id": 1333,
+      "polygon": [
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.982882,
+        0.0,
+        0.184236
+      ],
+      "centroid": [
+        194.195478,
+        0.0,
+        26.119636
+      ],
+      "area": 2515.866015,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "blue",
+      "repainted": false
+    },
+    {
+      "name": "green_ny",
+      "colour": "green",
+      "face_entity_id": 1335,
+      "polygon": [
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          52.735091,
+          -49.679135,
+          5.838525
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        -0.517895,
+        -0.830429,
+        0.20536
+      ],
+      "centroid": [
+        81.972634,
+        -66.584715,
+        11.209955
+      ],
+      "area": 845.57423,
+      "num_vertices": 3,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "green",
+      "repainted": false
+    },
+    {
+      "name": "red_ny",
+      "colour": "red",
+      "face_entity_id": 1336,
+      "polygon": [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.006944,
+        -0.999976,
+        0.0
+      ],
+      "centroid": [
+        128.669362,
+        -74.814765,
+        13.927517
+      ],
+      "area": 2218.053822,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "red",
+      "repainted": false
+    },
+    {
+      "name": "green_pz_yn",
+      "colour": "green",
+      "face_entity_id": 1341,
+      "polygon": [
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.003136,
+        -0.707103,
+        0.707103
+      ],
+      "centroid": [
+        124.503354,
+        -52.94457,
+        53.102074
+      ],
+      "area": 2619.007294,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "green",
+      "repainted": false
+    },
+    {
+      "name": "green_py",
+      "colour": "green",
+      "face_entity_id": 1343,
+      "polygon": [
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.006944,
+        0.999976,
+        0.0
+      ],
+      "centroid": [
+        128.669362,
+        74.814765,
+        13.927517
+      ],
+      "area": 2218.053822,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "green",
+      "repainted": false
+    },
+    {
+      "name": "blue_pz",
+      "colour": "blue",
+      "face_entity_id": 1344,
+      "polygon": [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "centroid": [
+        120.254988,
+        0.0,
+        74.990533
+      ],
+      "area": 2100.306607,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "blue",
+      "repainted": false
+    },
+    {
+      "name": "red_pz_yp",
+      "colour": "red",
+      "face_entity_id": 1346,
+      "polygon": [
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        0.003136,
+        0.707103,
+        0.707103
+      ],
+      "centroid": [
+        124.503354,
+        52.94457,
+        53.102074
+      ],
+      "area": 2619.007294,
+      "num_vertices": 4,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "red",
+      "repainted": false
+    },
+    {
+      "name": "blue_py",
+      "colour": "blue",
+      "face_entity_id": 1347,
+      "polygon": [
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ],
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ]
+      ],
+      "winding": "counter-clockwise about the outward normal",
+      "normal": [
+        -0.517895,
+        0.830429,
+        0.20536
+      ],
+      "centroid": [
+        81.972634,
+        66.584715,
+        11.209955
+      ],
+      "area": 845.57423,
+      "num_vertices": 3,
+      "use_for_pose": true,
+      "note": "",
+      "step_colour": "blue",
+      "repainted": false
+    }
+  ],
+  "edges": [
+    {
+      "face_a": "anchor_yn",
+      "face_b": "green_ny",
+      "colour_a": "white",
+      "colour_b": "green",
+      "step_edge_id": 924,
+      "p0": [
+        52.735091,
+        -49.679135,
+        5.838525
+      ],
+      "p1": [
+        103.357882,
+        -74.990521,
+        31.149921
+      ],
+      "ref_b": [
+        81.972634,
+        -66.584715,
+        11.209955
+      ],
+      "normal_b": [
+        -0.517895,
+        -0.830429,
+        0.20536
+      ],
+      "length": 62.0,
+      "dihedral_deg": 153.769048,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yn",
+      "face_b": "green_pz_yn",
+      "colour_a": "white",
+      "colour_b": "green",
+      "step_edge_id": 936,
+      "p0": [
+        103.357882,
+        -74.990521,
+        31.149921
+      ],
+      "p1": [
+        103.357882,
+        -31.149892,
+        74.990533
+      ],
+      "ref_b": [
+        124.503354,
+        -52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        -0.707103,
+        0.707103
+      ],
+      "length": 62.0,
+      "dihedral_deg": 144.555918,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yn",
+      "face_b": "red_pz",
+      "colour_a": "white",
+      "colour_b": "red",
+      "step_edge_id": 906,
+      "p0": [
+        103.357882,
+        -31.149892,
+        74.990533
+      ],
+      "p1": [
+        52.735091,
+        -5.838506,
+        49.679137
+      ],
+      "ref_b": [
+        78.046486,
+        -0.0,
+        62.334835
+      ],
+      "normal_b": [
+        -0.447214,
+        0.0,
+        0.894427
+      ],
+      "length": 62.0,
+      "dihedral_deg": 140.768488,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yc",
+      "face_b": "blue_pz",
+      "colour_a": "white",
+      "colour_b": "blue",
+      "step_edge_id": 934,
+      "p0": [
+        137.152093,
+        31.0,
+        74.990533
+      ],
+      "p1": [
+        137.152093,
+        -31.0,
+        74.990533
+      ],
+      "ref_b": [
+        120.254988,
+        0.0,
+        74.990533
+      ],
+      "normal_b": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "length": 62.0,
+      "dihedral_deg": 150.0,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yc",
+      "face_b": "red_pz_yn",
+      "colour_a": "white",
+      "colour_b": "red",
+      "step_edge_id": 911,
+      "p0": [
+        137.152093,
+        -31.0,
+        74.990533
+      ],
+      "p1": [
+        190.845669,
+        -31.0,
+        43.990533
+      ],
+      "ref_b": [
+        160.71444,
+        -45.545955,
+        50.086126
+      ],
+      "normal_b": [
+        0.414845,
+        -0.558224,
+        0.718533
+      ],
+      "length": 62.0,
+      "dihedral_deg": 146.066907,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yc",
+      "face_b": "blue_px",
+      "colour_a": "white",
+      "colour_b": "blue",
+      "step_edge_id": 920,
+      "p0": [
+        190.845669,
+        -31.0,
+        43.990533
+      ],
+      "p1": [
+        190.845669,
+        31.0,
+        43.990533
+      ],
+      "ref_b": [
+        194.195478,
+        0.0,
+        26.119636
+      ],
+      "normal_b": [
+        0.982882,
+        0.0,
+        0.184236
+      ],
+      "length": 62.0,
+      "dihedral_deg": 130.61661,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yc",
+      "face_b": "green_pz",
+      "colour_a": "white",
+      "colour_b": "green",
+      "step_edge_id": 916,
+      "p0": [
+        190.845669,
+        31.0,
+        43.990533
+      ],
+      "p1": [
+        137.152093,
+        31.0,
+        74.990533
+      ],
+      "ref_b": [
+        160.71444,
+        45.545955,
+        50.086126
+      ],
+      "normal_b": [
+        0.414845,
+        0.558224,
+        0.718533
+      ],
+      "length": 62.0,
+      "dihedral_deg": 146.066907,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yp",
+      "face_b": "red_pz",
+      "colour_a": "white",
+      "colour_b": "red",
+      "step_edge_id": 908,
+      "p0": [
+        52.735091,
+        5.838506,
+        49.679137
+      ],
+      "p1": [
+        103.357882,
+        31.149892,
+        74.990533
+      ],
+      "ref_b": [
+        78.046486,
+        -0.0,
+        62.334835
+      ],
+      "normal_b": [
+        -0.447214,
+        0.0,
+        0.894427
+      ],
+      "length": 62.0,
+      "dihedral_deg": 140.768488,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yp",
+      "face_b": "red_pz_yp",
+      "colour_a": "white",
+      "colour_b": "red",
+      "step_edge_id": 945,
+      "p0": [
+        103.357882,
+        31.149892,
+        74.990533
+      ],
+      "p1": [
+        103.357882,
+        74.990521,
+        31.149921
+      ],
+      "ref_b": [
+        124.503354,
+        52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        0.707103,
+        0.707103
+      ],
+      "length": 62.0,
+      "dihedral_deg": 144.555918,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "anchor_yp",
+      "face_b": "blue_py",
+      "colour_a": "white",
+      "colour_b": "blue",
+      "step_edge_id": 946,
+      "p0": [
+        103.357882,
+        74.990521,
+        31.149921
+      ],
+      "p1": [
+        52.735091,
+        49.679135,
+        5.838525
+      ],
+      "ref_b": [
+        81.972634,
+        66.584715,
+        11.209955
+      ],
+      "normal_b": [
+        -0.517895,
+        0.830429,
+        0.20536
+      ],
+      "length": 62.0,
+      "dihedral_deg": 153.769048,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_pz",
+      "face_b": "blue_pz",
+      "colour_a": "red",
+      "colour_b": "blue",
+      "step_edge_id": 907,
+      "p0": [
+        103.357882,
+        -31.149892,
+        74.990533
+      ],
+      "p1": [
+        103.357882,
+        31.149892,
+        74.990533
+      ],
+      "ref_b": [
+        120.254988,
+        0.0,
+        74.990533
+      ],
+      "normal_b": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "length": 62.299785,
+      "dihedral_deg": 153.434949,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_pz_yn",
+      "face_b": "green_pz_yn",
+      "colour_a": "red",
+      "colour_b": "green",
+      "step_edge_id": 909,
+      "p0": [
+        137.152093,
+        -31.0,
+        74.990533
+      ],
+      "p1": [
+        154.145559,
+        -74.637865,
+        31.277311
+      ],
+      "ref_b": [
+        124.503354,
+        -52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        -0.707103,
+        0.707103
+      ],
+      "length": 64.061587,
+      "dihedral_deg": 154.70237,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_pz_yn",
+      "face_b": "green_px",
+      "colour_a": "red",
+      "colour_b": "green",
+      "step_edge_id": 910,
+      "p0": [
+        154.145559,
+        -74.637865,
+        31.277311
+      ],
+      "p1": [
+        190.845669,
+        -31.0,
+        43.990533
+      ],
+      "ref_b": [
+        177.471398,
+        -54.592285,
+        20.0395
+      ],
+      "normal_b": [
+        0.698693,
+        -0.664696,
+        0.264589
+      ],
+      "length": 58.419067,
+      "dihedral_deg": 148.322185,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_px",
+      "face_b": "red_ny",
+      "colour_a": "green",
+      "colour_b": "red",
+      "step_edge_id": 912,
+      "p0": [
+        154.145559,
+        -74.637865,
+        31.277311
+      ],
+      "p1": [
+        167.349077,
+        -74.546184,
+        -3.358582
+      ],
+      "ref_b": [
+        128.669362,
+        -74.814765,
+        13.927517
+      ],
+      "normal_b": [
+        0.006944,
+        -0.999976,
+        0.0
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 132.030882,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_px",
+      "face_b": "body_1337",
+      "colour_a": "green",
+      "colour_b": "body",
+      "step_edge_id": 913,
+      "p0": [
+        167.349077,
+        -74.546184,
+        -3.358582
+      ],
+      "p1": [
+        197.545288,
+        -38.185093,
+        8.248738
+      ],
+      "ref_b": [
+        181.204554,
+        -54.932401,
+        2.326706
+      ],
+      "normal_b": [
+        0.228726,
+        0.118504,
+        -0.966251
+      ],
+      "length": 48.668984,
+      "dihedral_deg": 79.943525,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_px",
+      "face_b": "blue_px",
+      "colour_a": "green",
+      "colour_b": "blue",
+      "step_edge_id": 914,
+      "p0": [
+        197.545288,
+        -38.185093,
+        8.248738
+      ],
+      "p1": [
+        190.845669,
+        -31.0,
+        43.990533
+      ],
+      "ref_b": [
+        194.195478,
+        0.0,
+        26.119636
+      ],
+      "normal_b": [
+        0.982882,
+        0.0,
+        0.184236
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 137.34779,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_pz",
+      "face_b": "red_pz_yp",
+      "colour_a": "green",
+      "colour_b": "red",
+      "step_edge_id": 915,
+      "p0": [
+        154.145559,
+        74.637865,
+        31.277311
+      ],
+      "p1": [
+        137.152093,
+        31.0,
+        74.990533
+      ],
+      "ref_b": [
+        124.503354,
+        52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        0.707103,
+        0.707103
+      ],
+      "length": 64.061587,
+      "dihedral_deg": 154.70237,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_pz",
+      "face_b": "red_px",
+      "colour_a": "green",
+      "colour_b": "red",
+      "step_edge_id": 917,
+      "p0": [
+        190.845669,
+        31.0,
+        43.990533
+      ],
+      "p1": [
+        154.145559,
+        74.637865,
+        31.277311
+      ],
+      "ref_b": [
+        177.471398,
+        54.592285,
+        20.0395
+      ],
+      "normal_b": [
+        0.698693,
+        0.664696,
+        0.264589
+      ],
+      "length": 58.419067,
+      "dihedral_deg": 148.322185,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_px",
+      "face_b": "green_py",
+      "colour_a": "red",
+      "colour_b": "green",
+      "step_edge_id": 918,
+      "p0": [
+        167.349077,
+        74.546184,
+        -3.358582
+      ],
+      "p1": [
+        154.145559,
+        74.637865,
+        31.277311
+      ],
+      "ref_b": [
+        128.669362,
+        74.814765,
+        13.927517
+      ],
+      "normal_b": [
+        0.006944,
+        0.999976,
+        0.0
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 132.030882,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_px",
+      "face_b": "blue_px",
+      "colour_a": "red",
+      "colour_b": "blue",
+      "step_edge_id": 919,
+      "p0": [
+        190.845669,
+        31.0,
+        43.990533
+      ],
+      "p1": [
+        197.545288,
+        38.185093,
+        8.248738
+      ],
+      "ref_b": [
+        194.195478,
+        0.0,
+        26.119636
+      ],
+      "normal_b": [
+        0.982882,
+        0.0,
+        0.184236
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 137.34779,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_px",
+      "face_b": "body_1323",
+      "colour_a": "red",
+      "colour_b": "body",
+      "step_edge_id": 887,
+      "p0": [
+        197.545288,
+        38.185093,
+        8.248738
+      ],
+      "p1": [
+        167.349077,
+        74.546184,
+        -3.358582
+      ],
+      "ref_b": [
+        186.936875,
+        25.24899,
+        4.170901
+      ],
+      "normal_b": [
+        0.358801,
+        -0.0,
+        -0.933414
+      ],
+      "length": 48.668984,
+      "dihedral_deg": 90.213201,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "blue_px",
+      "face_b": "body_1323",
+      "colour_a": "blue",
+      "colour_b": "body",
+      "step_edge_id": 888,
+      "p0": [
+        197.545288,
+        -38.185093,
+        8.248738
+      ],
+      "p1": [
+        197.545288,
+        38.185093,
+        8.248738
+      ],
+      "ref_b": [
+        186.936875,
+        25.24899,
+        4.170901
+      ],
+      "normal_b": [
+        0.358801,
+        -0.0,
+        -0.933414
+      ],
+      "length": 76.370185,
+      "dihedral_deg": 100.409979,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_ny",
+      "face_b": "red_ny",
+      "colour_a": "green",
+      "colour_b": "red",
+      "step_edge_id": 923,
+      "p0": [
+        89.82493,
+        -75.08449,
+        -3.358582
+      ],
+      "p1": [
+        103.357882,
+        -74.990521,
+        31.149921
+      ],
+      "ref_b": [
+        128.669362,
+        -74.814765,
+        13.927517
+      ],
+      "normal_b": [
+        0.006944,
+        -0.999976,
+        0.0
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 145.772735,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_ny",
+      "face_b": "green_pz_yn",
+      "colour_a": "red",
+      "colour_b": "green",
+      "step_edge_id": 926,
+      "p0": [
+        154.145559,
+        -74.637865,
+        31.277311
+      ],
+      "p1": [
+        103.357882,
+        -74.990521,
+        31.149921
+      ],
+      "ref_b": [
+        124.503354,
+        -52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        -0.707103,
+        0.707103
+      ],
+      "length": 50.789061,
+      "dihedral_deg": 135.000091,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "red_ny",
+      "face_b": "body_1326",
+      "colour_a": "red",
+      "colour_b": "body",
+      "step_edge_id": 897,
+      "p0": [
+        89.82493,
+        -75.08449,
+        -3.358582
+      ],
+      "p1": [
+        167.349077,
+        -74.546184,
+        -3.358582
+      ],
+      "ref_b": [
+        120.327755,
+        -73.115051,
+        -3.229282
+      ],
+      "normal_b": [
+        -0.000509,
+        0.073366,
+        -0.997305
+      ],
+      "length": 77.526016,
+      "dihedral_deg": 85.792548,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_pz_yn",
+      "face_b": "blue_pz",
+      "colour_a": "green",
+      "colour_b": "blue",
+      "step_edge_id": 935,
+      "p0": [
+        137.152093,
+        -31.0,
+        74.990533
+      ],
+      "p1": [
+        103.357882,
+        -31.149892,
+        74.990533
+      ],
+      "ref_b": [
+        120.254988,
+        0.0,
+        74.990533
+      ],
+      "normal_b": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "length": 33.794544,
+      "dihedral_deg": 134.999729,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_py",
+      "face_b": "red_pz_yp",
+      "colour_a": "green",
+      "colour_b": "red",
+      "step_edge_id": 940,
+      "p0": [
+        103.357882,
+        74.990521,
+        31.149921
+      ],
+      "p1": [
+        154.145559,
+        74.637865,
+        31.277311
+      ],
+      "ref_b": [
+        124.503354,
+        52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        0.707103,
+        0.707103
+      ],
+      "length": 50.789061,
+      "dihedral_deg": 135.000091,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_py",
+      "face_b": "body_1339",
+      "colour_a": "green",
+      "colour_b": "body",
+      "step_edge_id": 932,
+      "p0": [
+        167.349077,
+        74.546184,
+        -3.358582
+      ],
+      "p1": [
+        89.82493,
+        75.08449,
+        -3.358582
+      ],
+      "ref_b": [
+        136.854322,
+        72.649602,
+        -3.141094
+      ],
+      "normal_b": [
+        -0.000713,
+        -0.102612,
+        -0.994721
+      ],
+      "length": 77.526016,
+      "dihedral_deg": 84.110266,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "green_py",
+      "face_b": "blue_py",
+      "colour_a": "green",
+      "colour_b": "blue",
+      "step_edge_id": 941,
+      "p0": [
+        89.82493,
+        75.08449,
+        -3.358582
+      ],
+      "p1": [
+        103.357882,
+        74.990521,
+        31.149921
+      ],
+      "ref_b": [
+        81.972634,
+        66.584715,
+        11.209955
+      ],
+      "normal_b": [
+        -0.517895,
+        0.830429,
+        0.20536
+      ],
+      "length": 37.067322,
+      "dihedral_deg": 145.772735,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "blue_pz",
+      "face_b": "red_pz_yp",
+      "colour_a": "blue",
+      "colour_b": "red",
+      "step_edge_id": 942,
+      "p0": [
+        137.152093,
+        31.0,
+        74.990533
+      ],
+      "p1": [
+        103.357882,
+        31.149892,
+        74.990533
+      ],
+      "ref_b": [
+        124.503354,
+        52.94457,
+        53.102074
+      ],
+      "normal_b": [
+        0.003136,
+        0.707103,
+        0.707103
+      ],
+      "length": 33.794544,
+      "dihedral_deg": 134.999729,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    },
+    {
+      "face_a": "blue_py",
+      "face_b": "body_1327",
+      "colour_a": "blue",
+      "colour_b": "body",
+      "step_edge_id": 904,
+      "p0": [
+        89.82493,
+        75.08449,
+        -3.358582
+      ],
+      "p1": [
+        52.735091,
+        49.679135,
+        5.838525
+      ],
+      "ref_b": [
+        70.041722,
+        59.074205,
+        1.780236
+      ],
+      "normal_b": [
+        -0.17925,
+        -0.09287,
+        -0.97941
+      ],
+      "length": 45.887635,
+      "dihedral_deg": 79.314299,
+      "convex": true,
+      "use_for_pose": true,
+      "has_ink": true,
+      "dark_lo": -1.0,
+      "dark_hi": 1.0,
+      "profile": "band_centre"
+    }
+  ],
+  "occluders": {
+    "triangles": [
+      [
+        [
+          17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          16.0
+        ],
+        [
+          17.5,
+          19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          14.75
+        ],
+        [
+          17.5,
+          17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          17.5,
+          -14.75
+        ],
+        [
+          -17.5,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          -17.5,
+          17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          17.5,
+          17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          17.5,
+          17.5,
+          14.75
+        ],
+        [
+          17.5,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          17.5,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          17.5,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          19.0,
+          16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          17.5,
+          -19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          -17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          -17.5,
+          0.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          -17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -17.5,
+          0.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          -17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          -17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -16.0
+        ],
+        [
+          -17.5,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          -14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          -14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          -19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          16.0
+        ]
+      ],
+      [
+        [
+          -17.5,
+          17.5,
+          14.75
+        ],
+        [
+          -17.5,
+          19.0,
+          16.0
+        ],
+        [
+          -17.5,
+          19.0,
+          14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          -14.75
+        ],
+        [
+          17.5,
+          19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -17.5,
+          -14.75
+        ],
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          19.0,
+          -14.75
+        ],
+        [
+          -13.68,
+          17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -16.0
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -16.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -19.0,
+          -14.75
+        ],
+        [
+          13.68,
+          -17.5,
+          -14.75
+        ]
+      ],
+      [
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -17.5,
+          -14.75
+        ],
+        [
+          13.68,
+          -17.5,
+          0.0
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -17.5,
+          0.0
+        ]
+      ],
+      [
+        [
+          -13.68,
+          17.5,
+          0.0
+        ],
+        [
+          13.68,
+          -17.5,
+          0.0
+        ],
+        [
+          -13.68,
+          -17.5,
+          0.0
+        ]
+      ],
+      [
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          195.172701,
+          -29.327529,
+          7.336724
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ]
+      ],
+      [
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ],
+        [
+          168.836197,
+          68.994334,
+          -2.786938
+        ]
+      ],
+      [
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          168.836197,
+          68.994334,
+          -2.786938
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          195.052105,
+          -35.563473,
+          7.980087
+        ],
+        [
+          195.172701,
+          -29.327529,
+          7.336724
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ],
+        [
+          92.218314,
+          72.567811,
+          -3.100684
+        ],
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          88.701132,
+          -71.304232,
+          -3.079915
+        ],
+        [
+          90.706505,
+          -72.578308,
+          -3.174666
+        ],
+        [
+          165.05713,
+          -72.062038,
+          -3.174666
+        ]
+      ],
+      [
+        [
+          88.701132,
+          -71.304232,
+          -3.079915
+        ],
+        [
+          165.05713,
+          -72.062038,
+          -3.174666
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          88.701132,
+          -71.304232,
+          -3.079915
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ],
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          90.667118,
+          72.578582,
+          -3.275101
+        ],
+        [
+          55.469838,
+          48.46957,
+          5.452711
+        ]
+      ],
+      [
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          55.469838,
+          48.46957,
+          5.452711
+        ],
+        [
+          55.235091,
+          48.162768,
+          5.524765
+        ]
+      ],
+      [
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          55.235091,
+          48.162768,
+          5.524765
+        ],
+        [
+          55.235091,
+          46.969489,
+          5.637915
+        ]
+      ],
+      [
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          55.235091,
+          46.969489,
+          5.637915
+        ],
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ]
+      ],
+      [
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          52.735091,
+          5.838506,
+          49.679137
+        ],
+        [
+          52.735091,
+          -5.838506,
+          49.679137
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ]
+      ],
+      [
+        [
+          52.735091,
+          5.838506,
+          49.679137
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ]
+      ],
+      [
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ],
+        [
+          197.545288,
+          38.185093,
+          8.248738
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ],
+        [
+          165.05713,
+          -72.062038,
+          -3.174666
+        ],
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          52.735091,
+          -49.679135,
+          5.838525
+        ]
+      ],
+      [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ],
+        [
+          89.82493,
+          -75.08449,
+          -3.358582
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ],
+        [
+          166.134512,
+          -72.054557,
+          -3.340507
+        ],
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ]
+      ],
+      [
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ],
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ],
+        [
+          195.052105,
+          -35.563473,
+          7.980087
+        ]
+      ],
+      [
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ],
+        [
+          195.052105,
+          -35.563473,
+          7.980087
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ]
+      ],
+      [
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ],
+        [
+          197.545288,
+          -38.185093,
+          8.248738
+        ],
+        [
+          167.349077,
+          -74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          55.235091,
+          46.969489,
+          5.637915
+        ],
+        [
+          55.235091,
+          41.26958,
+          5.218604
+        ],
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ]
+      ],
+      [
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ],
+        [
+          92.218314,
+          72.567811,
+          -3.100684
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          168.836197,
+          68.994334,
+          -2.786938
+        ]
+      ],
+      [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          190.845669,
+          -31.0,
+          43.990533
+        ],
+        [
+          190.845669,
+          31.0,
+          43.990533
+        ]
+      ],
+      [
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ]
+      ],
+      [
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          154.145559,
+          -74.637865,
+          31.277311
+        ]
+      ],
+      [
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ],
+        [
+          167.349077,
+          74.546184,
+          -3.358582
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ]
+      ],
+      [
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          137.152093,
+          -31.0,
+          74.990533
+        ]
+      ],
+      [
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          137.152093,
+          31.0,
+          74.990533
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ]
+      ],
+      [
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          154.145559,
+          74.637865,
+          31.277311
+        ],
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ]
+      ],
+      [
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ],
+        [
+          89.82493,
+          75.08449,
+          -3.358582
+        ],
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ]
+      ],
+      [
+        [
+          55.235091,
+          -5.553464,
+          48.134052
+        ],
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          103.948052,
+          29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          55.235091,
+          -5.553464,
+          48.134052
+        ],
+        [
+          103.948052,
+          29.909936,
+          72.490533
+        ],
+        [
+          103.948052,
+          -29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          153.272506,
+          -72.143867,
+          30.23963
+        ],
+        [
+          136.953231,
+          -30.237269,
+          72.218595
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          153.272506,
+          -72.143867,
+          30.23963
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ],
+        [
+          153.350452,
+          -72.143326,
+          30.195048
+        ]
+      ],
+      [
+        [
+          166.134512,
+          -72.054557,
+          -3.340507
+        ],
+        [
+          153.350452,
+          -72.143326,
+          30.195048
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          166.134512,
+          -72.054557,
+          -3.340507
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ],
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ]
+      ],
+      [
+        [
+          136.953231,
+          30.237269,
+          72.218595
+        ],
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ]
+      ],
+      [
+        [
+          136.953231,
+          30.237269,
+          72.218595
+        ],
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ],
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ],
+        [
+          168.836197,
+          68.994334,
+          -2.786938
+        ]
+      ],
+      [
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ],
+        [
+          168.836197,
+          68.994334,
+          -2.786938
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ]
+      ],
+      [
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ]
+      ],
+      [
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ],
+        [
+          195.172701,
+          37.28095,
+          7.336724
+        ],
+        [
+          195.172701,
+          -29.327529,
+          7.336724
+        ]
+      ],
+      [
+        [
+          195.087909,
+          -37.190014,
+          7.789079
+        ],
+        [
+          195.172701,
+          -29.327529,
+          7.336724
+        ],
+        [
+          195.052105,
+          -35.563473,
+          7.980087
+        ]
+      ],
+      [
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          55.235091,
+          48.162768,
+          5.524765
+        ],
+        [
+          55.469838,
+          48.46957,
+          5.452711
+        ]
+      ],
+      [
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          55.469838,
+          48.46957,
+          5.452711
+        ],
+        [
+          103.509533,
+          72.489408,
+          29.472558
+        ]
+      ],
+      [
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          103.509533,
+          72.489408,
+          29.472558
+        ],
+        [
+          104.148949,
+          72.484968,
+          30.116414
+        ]
+      ],
+      [
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          104.148949,
+          72.484968,
+          30.116414
+        ],
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ]
+      ],
+      [
+        [
+          55.235091,
+          5.553464,
+          48.134052
+        ],
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          103.948052,
+          29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          90.706505,
+          -72.578308,
+          -3.174666
+        ],
+        [
+          88.701132,
+          -71.304232,
+          -3.079915
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          88.701132,
+          -71.304232,
+          -3.079915
+        ],
+        [
+          55.235091,
+          -48.381063,
+          5.218604
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          55.235091,
+          -48.381063,
+          5.218604
+        ],
+        [
+          55.235091,
+          -48.352196,
+          5.335337
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          153.272506,
+          -72.143867,
+          30.23963
+        ],
+        [
+          153.350452,
+          -72.143326,
+          30.195048
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          153.350452,
+          -72.143326,
+          30.195048
+        ],
+        [
+          166.134512,
+          -72.054557,
+          -3.340507
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          166.134512,
+          -72.054557,
+          -3.340507
+        ],
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          166.058431,
+          -72.055085,
+          -3.358582
+        ],
+        [
+          165.05713,
+          -72.062038,
+          -3.174666
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          165.05713,
+          -72.062038,
+          -3.174666
+        ],
+        [
+          90.706505,
+          -72.578308,
+          -3.174666
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ],
+        [
+          90.706505,
+          -72.578308,
+          -3.174666
+        ],
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ]
+      ],
+      [
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          136.48222,
+          29.96742,
+          72.490533
+        ],
+        [
+          136.953231,
+          30.237269,
+          72.218595
+        ]
+      ],
+      [
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          136.953231,
+          30.237269,
+          72.218595
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          188.597158,
+          30.234745,
+          42.40196
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ]
+      ],
+      [
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          188.597158,
+          -30.234745,
+          42.40196
+        ],
+        [
+          136.953231,
+          -30.237269,
+          72.218595
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ],
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          136.953231,
+          -30.237269,
+          72.218595
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ],
+        [
+          136.953231,
+          -30.237269,
+          72.218595
+        ],
+        [
+          153.272506,
+          -72.143867,
+          30.23963
+        ]
+      ],
+      [
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ],
+        [
+          153.272506,
+          -72.143867,
+          30.23963
+        ],
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          104.148949,
+          72.484968,
+          30.116414
+        ],
+        [
+          103.509533,
+          72.489408,
+          29.472558
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          103.509533,
+          72.489408,
+          29.472558
+        ],
+        [
+          90.667118,
+          72.578582,
+          -3.275101
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          90.667118,
+          72.578582,
+          -3.275101
+        ],
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          91.124897,
+          72.575403,
+          -3.358582
+        ],
+        [
+          92.218314,
+          72.567811,
+          -3.100684
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          92.218314,
+          72.567811,
+          -3.100684
+        ],
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ]
+      ],
+      [
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          166.043089,
+          72.055192,
+          -3.100684
+        ],
+        [
+          153.350452,
+          72.143326,
+          30.195048
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          55.235091,
+          -48.352196,
+          5.335337
+        ],
+        [
+          55.235091,
+          -5.553464,
+          48.134052
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          55.235091,
+          -5.553464,
+          48.134052
+        ],
+        [
+          103.948052,
+          -29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          103.948052,
+          -29.909936,
+          72.490533
+        ],
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ]
+      ],
+      [
+        [
+          103.509533,
+          -72.489408,
+          29.472558
+        ],
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ],
+        [
+          104.148949,
+          -72.484968,
+          30.116414
+        ]
+      ],
+      [
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          136.48222,
+          29.96742,
+          72.490533
+        ],
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ]
+      ],
+      [
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          136.48222,
+          -29.96742,
+          72.490533
+        ],
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ]
+      ],
+      [
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          104.148949,
+          -30.110833,
+          72.490533
+        ],
+        [
+          103.948052,
+          -29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          103.948052,
+          -29.909936,
+          72.490533
+        ],
+        [
+          103.948052,
+          29.909936,
+          72.490533
+        ]
+      ],
+      [
+        [
+          136.48222,
+          29.96742,
+          72.490533
+        ],
+        [
+          104.148949,
+          30.110833,
+          72.490533
+        ],
+        [
+          104.148949,
+          72.484968,
+          30.116414
+        ]
+      ],
+      [
+        [
+          136.48222,
+          29.96742,
+          72.490533
+        ],
+        [
+          104.148949,
+          72.484968,
+          30.116414
+        ],
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ]
+      ],
+      [
+        [
+          136.48222,
+          29.96742,
+          72.490533
+        ],
+        [
+          153.272506,
+          72.143867,
+          30.23963
+        ],
+        [
+          136.953231,
+          30.237269,
+          72.218595
+        ]
+      ],
+      [
+        [
+          90.667118,
+          72.578582,
+          -3.275101
+        ],
+        [
+          103.509533,
+          72.489408,
+          29.472558
+        ],
+        [
+          55.469838,
+          48.46957,
+          5.452711
+        ]
+      ],
+      [
+        [
+          52.735091,
+          -49.679135,
+          5.838525
+        ],
+        [
+          103.357882,
+          -74.990521,
+          31.149921
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ]
+      ],
+      [
+        [
+          52.735091,
+          -49.679135,
+          5.838525
+        ],
+        [
+          103.357882,
+          -31.149892,
+          74.990533
+        ],
+        [
+          52.735091,
+          -5.838506,
+          49.679137
+        ]
+      ],
+      [
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ],
+        [
+          52.735091,
+          5.838506,
+          49.679137
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ]
+      ],
+      [
+        [
+          52.735091,
+          49.679135,
+          5.838525
+        ],
+        [
+          103.357882,
+          31.149892,
+          74.990533
+        ],
+        [
+          103.357882,
+          74.990521,
+          31.149921
+        ]
+      ]
+    ],
+    "face_entity_ids": [
+      1296,
+      1296,
+      1297,
+      1297,
+      1298,
+      1298,
+      1299,
+      1299,
+      1300,
+      1300,
+      1301,
+      1301,
+      1302,
+      1302,
+      1303,
+      1303,
+      1304,
+      1304,
+      1305,
+      1305,
+      1306,
+      1306,
+      1307,
+      1307,
+      1308,
+      1308,
+      1309,
+      1309,
+      1310,
+      1310,
+      1310,
+      1310,
+      1310,
+      1310,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1311,
+      1312,
+      1312,
+      1312,
+      1312,
+      1312,
+      1312,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1313,
+      1314,
+      1314,
+      1315,
+      1315,
+      1315,
+      1315,
+      1315,
+      1315,
+      1316,
+      1316,
+      1316,
+      1316,
+      1316,
+      1316,
+      1317,
+      1317,
+      1323,
+      1323,
+      1323,
+      1323,
+      1324,
+      1325,
+      1326,
+      1326,
+      1326,
+      1327,
+      1327,
+      1327,
+      1327,
+      1327,
+      1328,
+      1328,
+      1329,
+      1330,
+      1330,
+      1331,
+      1332,
+      1332,
+      1333,
+      1333,
+      1334,
+      1335,
+      1336,
+      1336,
+      1337,
+      1337,
+      1337,
+      1337,
+      1338,
+      1339,
+      1339,
+      1339,
+      1340,
+      1340,
+      1341,
+      1341,
+      1343,
+      1343,
+      1344,
+      1344,
+      1346,
+      1346,
+      1347,
+      1348,
+      1348,
+      1349,
+      1349,
+      1350,
+      1350,
+      1351,
+      1351,
+      1352,
+      1352,
+      1352,
+      1353,
+      1353,
+      1353,
+      1353,
+      1354,
+      1354,
+      1354,
+      1354,
+      1354,
+      1355,
+      1355,
+      1355,
+      1356,
+      1356,
+      1356,
+      1356,
+      1356,
+      1356,
+      1357,
+      1357,
+      1357,
+      1357,
+      1358,
+      1358,
+      1358,
+      1359,
+      1359,
+      1359,
+      1359,
+      1359,
+      1359,
+      1360,
+      1360,
+      1360,
+      1360,
+      1361,
+      1361,
+      1361,
+      1361,
+      1363,
+      1363,
+      1363,
+      1364,
+      1365,
+      1365,
+      1366,
+      1366
+    ],
+    "note": "every planar face, fan-triangulated over its outer loop; inner loops (the two 15 mm bores) are filled, which can only over-report occlusion, never under-report"
+  },
+  "diagnostics": {
+    "num_anchors": 3,
+    "num_facets_for_pose": 13,
+    "num_facets_excluded": 0,
+    "facet_colour_counts": {
+      "red": 5,
+      "green": 5,
+      "blue": 3
+    },
+    "facet_vertex_counts": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "same_colour_shared_edges": [],
+    "num_edges": 31,
+    "num_measurable_edges": 31,
+    "num_unbiased_edges": 31,
+    "measurable_edge_length_mm": 1693.48,
+    "unbiased_edge_length_mm": 1693.48,
+    "feature_spread_rms_mm": 75.52,
+    "min_normal_separation_deg": 25.3,
+    "mirror_pairs_y": [],
+    "unbiased_edge_length_mm_by_alignment": {
+      "inside": 698.83,
+      "centred": 1693.48,
+      "outside": 698.83
+    },
+    "chirality_carrying_pairs": [
+      [
+        "red_pz_yn",
+        "green_pz"
+      ],
+      [
+        "green_px",
+        "red_px"
+      ],
+      [
+        "green_ny",
+        "blue_py"
+      ],
+      [
+        "red_ny",
+        "green_py"
+      ],
+      [
+        "green_pz_yn",
+        "red_pz_yp"
+      ]
+    ],
+    "side_blind_pairs": [],
+    "self_mirrored_facets": [
+      "blue_px",
+      "blue_pz",
+      "red_pz"
+    ],
+    "chirality_carrying_facets": [
+      "blue_py",
+      "green_ny",
+      "green_px",
+      "green_py",
+      "green_pz",
+      "green_pz_yn",
+      "red_ny",
+      "red_px",
+      "red_pz_yn",
+      "red_pz_yp"
+    ],
+    "chirality_carrying_area_fraction": 0.734
+  },
+  "warnings": []
+}

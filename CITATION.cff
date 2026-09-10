@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the repository and the associated paper."
+title: "Hybrid Detector: CAD-constrained fiducial and colour-facet pose estimation"
+type: software
+version: 0.1.0
+date-released: 2026-09-10
+authors:
+  - family-names: "TBD"
+    given-names: "TBD"
+repository-code: "TBD before publication"
+keywords:
+  - fiducial marker
+  - pose estimation
+  - CAD
+  - colour facets
+license: "Proprietary"
