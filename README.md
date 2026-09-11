@@ -105,10 +105,15 @@ if result.success:
 ## Current evidence
 
 On the 2026-09-09 seven-camera bench capture, the detector produced a joint pose
-for 2403/2403 processable frames. Median joint reprojection error was 1.261 px;
-median reported position and rotation uncertainty were 0.061 mm and 0.0372 deg.
+for 2403/2403 processable frames. Median joint reprojection error was 1.261 px.
 These are repeatability/internal-consistency results, not an independent
-traceable accuracy certification. See [docs/validation.md](docs/validation.md).
+traceable accuracy certification.
+
+The reported position and rotation uncertainties this section used to quote
+(0.061 mm, 0.0372 deg) are withdrawn: they predate the covariance correction in
+`solve_carrier_pose` and understate the uncertainty by roughly four times, and
+they were never a substitute for external ground truth in the first place. See
+[docs/validation.md](docs/validation.md).
 
 ## Citation and license
 

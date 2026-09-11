@@ -1,7 +1,9 @@
 # IP and publication assessment
 
-Assessment date: 2026-09-10. This is an engineering prior-art screen, not a
-patentability opinion or freedom-to-operate analysis.
+Assessment date: 2026-09-10. Revised 2026-09-10 to add the model-based 3D edge
+tracking family, which the first pass of this screen missed entirely. This is an
+engineering prior-art screen, not a patentability opinion or freedom-to-operate
+analysis.
 
 ## Executive assessment
 
@@ -30,6 +32,18 @@ Patentability is therefore **possible but unproven**; the present confidence is
 medium-low until a professional claim chart and jurisdiction-specific search
 are complete.
 
+That list needs one correction. Items 2, 3, 4, and 5 are, taken together, the
+standard model-based 3D edge tracking recipe, published since 1990 and shipped
+in an open-source library. The first version of this screen compared the method
+only against planar fiducial markers and coloured-marker patents, and so read as
+novel a sequence that a reader from the augmented-reality tracking community
+would recognize on sight. See
+[the family this screen missed](#the-family-this-screen-missed-model-based-3d-edge-tracking)
+below. The invention case has to be argued somewhere other than the
+predict-project-measure loop; the two candidates that survive are the two-scale
+build calibration and the pre-fit observability admission, both of which are
+about what the estimator refuses to do rather than how it iterates.
+
 ## Closest technical themes found
 
 The following references should be treated as starting points, not an exhaustive
@@ -49,6 +63,51 @@ Other baseline systems that belong in the paper comparison include
 [AprilTag](https://april.eecs.umich.edu/software/apriltag.html),
 [TopoTag](https://arxiv.org/abs/1908.01450), and
 [RUNE-Tag](https://www.dsi.unive.it/~bergamasco/runetag/).
+
+## The family this screen missed: model-based 3D edge tracking
+
+Every reference in the table above is a *marker*. The method in this repository
+is only half a marker method. Steps 3 through 6 of [method.md](method.md) --
+project a known CAD model from a current pose estimate, decide which faces are
+front-facing, search along each predicted boundary's normal for the image
+evidence, and fold the resulting one-dimensional displacements into a robust
+pose update -- are the defining loop of model-based tracking (MBT), a literature
+that starts before ArUco existed and that no coloured-marker search will
+surface.
+
+| Reference | What it already discloses | Distance from this work |
+|---|---|---|
+| Harris and Stennett, *RAPiD -- a video rate object tracker*, BMVC 1990 | The loop itself: a known 3D model at a predicted pose, control points on its edges, a one-dimensional search along each edge normal, and a linearized pose update from the normal displacements. | This is the ancestor of step 4 and step 6. Nothing about the residual form here is new. |
+| Drummond and Cipolla, *Real-time visual tracking of complex structures*, IEEE TPAMI 24(7), 2002 | Adds hidden-line removal from the predicted pose (step 3), robust M-estimation over the normal residuals (step 6), and a Lie-algebra pose parameterization. Handles articulated and self-occluding structures. | The visibility prediction and the robust joint solve are both here. Our Huber loss on `se(3)` increments is the textbook version. |
+| Comport, Marchand, Pressigout and Chaumette, *Real-time markerless tracking for augmented reality: the virtual visual servoing framework*, IEEE TVCG 12(4), 2006 | The same contract as a virtual visual servoing problem, with Tukey weighting; shipped as ViSP's `vpMbEdgeTracker` / `vpMbGenericTracker`, which also accepts a fiducial marker for initialization. | **The closest single reference.** An open, maintained implementation that takes a CAD model, initializes from a marker, and refines on edge-normal residuals. Any claim over the loop has to distinguish itself from a library a reviewer can `apt install`. |
+| Wuest, Vial and Stricker, *Adaptive line tracking with multiple hypotheses for augmented reality*, ISMAR 2005 | Multiple candidate responses per normal search, carried forward and disambiguated rather than committed to at first crossing. | Our `_measure_profile` commits to one landmark per profile and rejects on profile shape instead. That is a simplification of this, not an advance on it. |
+| Petit, Marchand and Kanani, *Combining complementary edge, keypoint and colour features in model-based tracking for highly dynamic scenes*, ICRA 2014 | Colour used as a complementary cue *inside a model-based edge tracker*, fused with edge and keypoint residuals in one pose solve. | This is step 5 -- colour supporting or rejecting predictions inside projected regions -- with the same motivation. Our colour is a hard correspondence gate rather than a fused residual, which is a difference in role, not in kind. |
+| Prisacariu and Reid, *PWP3D: real-time segmentation and tracking of 3D objects*, IJCV 98(3), 2012 | 6-DoF pose of a known 3D model driven purely by region colour statistics -- the pose that best separates foreground from background colour models. | Establishes colour-plus-known-3D-model pose estimation as a whole field. Our facets are painted and semantically labelled rather than statistically segmented, but "colour tells the CAD model where it is" is not new. |
+| Tjaden, Schwanecke, Schoemer and Kraus, *A region-based Gauss-Newton approach to real-time monocular multiple object tracking*, IEEE TPAMI 41(8), 2019 | Per-region colour histograms attached to a known mesh, optimized to a pose by Gauss-Newton, robust to partial occlusion. | Same as above, with the optimizer we use. |
+
+### Where that leaves each step
+
+| method.md step | Prior art status |
+|---|---|
+| 1. decode anchors, establish identity and scale | ArUco/AprilTag. Not novel. |
+| 2. PnP hypotheses, paste-quadrant search | The quadrant search is unusual but is a consequence of the manufacturing choice, not an estimator contribution. |
+| 3. predict front-facing facets from the pose | Drummond and Cipolla 2002 (hidden-line removal). Not novel. |
+| 4. sub-pixel measurement along boundary normals | Harris and Stennett 1990. Not novel. |
+| 5. colour classification inside projected supports | Petit et al. 2014; PWP3D. Not novel as a cue; the *gate* framing is a narrow difference. |
+| 6. robust joint solve on 2-D corner and 1-D normal residuals | Comport et al. 2006. Not novel. |
+| 7. refuse under-constrained solutions | **Candidate.** A pre-fit geometric admission -- fold edge normals onto a half turn, measure angular spread, count distinct facet planes -- run *before* the solve. Degeneracy detection by Jacobian conditioning after the fact is common; deciding from the geometry that the measurement set cannot be taken is the part to chart. `detector.py:2115`. |
+| (build) two-scale print calibration | **Candidate, strongest.** Estimating an inter-anchor body scale and a sticker-image scale as separate parameters and letting only the body scale move the tool origin. Photogrammetric scale self-calibration is old; treating the printed part and the printed sticker as two independently mis-scaled objects, with different consequences for the reported TCP, is what needs a search. `detector.py:1409`. |
+
+### Consequences for the two go/no-go gates
+
+- **Patent search gate.** Counsel's search must cover MBT, not only marker
+  patents. Add CPC `G06T7/246` (tracking) and `G06T7/75`
+  (model-based pose) alongside the marker classes already listed, and hand
+  counsel the six references above as named art to design around.
+- **Novelty gate for the paper.** A submission that presents steps 3 to 6 as
+  the contribution will be desk-rejected by any reviewer from ISMAR, ICRA, or
+  TVCG. The paper's claim has to be the carrier and the calibration contract,
+  with ViSP's `vpMbGenericTracker` run as a baseline rather than ignored.
 
 ## Candidate claim families
 
@@ -93,10 +152,14 @@ Before filing:
    authorship;
 4. preserve dated CAD, source, raw images, lab notes, print measurements, and
    benchmark configurations;
-5. ask patent counsel to search CPC classes around `G06T7/73`, `G06V20/20`,
-   `G06V10/44`, and optical marker subclasses, including CN/US/EP/PCT families;
-6. draft an element-by-element claim chart against at least the seven references
-   above; and
+5. ask patent counsel to search CPC classes around `G06T7/73`, `G06T7/246`,
+   `G06T7/75`, `G06V20/20`, `G06V10/44`, and optical marker subclasses,
+   including CN/US/EP/PCT families, and to treat model-based tracking as an
+   in-scope field rather than a neighbouring one;
+6. draft an element-by-element claim chart against the seven marker references
+   and the seven model-based tracking references above, with ViSP's
+   `vpMbGenericTracker` charted as a working implementation, not just a paper;
+   and
 7. file before submitting a paper, posting video, distributing binaries/PDFs,
    or opening this repository.
 
@@ -131,7 +194,8 @@ covariance cannot substitute for external accuracy ground truth.
 ## Go/no-go gates
 
 - **Patent search gate:** counsel finds a claim scope that survives the closest
-  predict-project-test and multi-facet marker references.
+  predict-project-test and multi-facet marker references *and* the model-based
+  edge tracking family, ViSP included.
 - **Novelty gate:** no uncontrolled public disclosure predates the intended
   priority filing.
 - **Measurement gate:** external ground truth shows a significant improvement

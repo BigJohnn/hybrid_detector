@@ -323,6 +323,31 @@ def test_the_sticker_rotation_is_recovered_not_assumed(model, camera):
     assert translation_mm < 6.0 and rotation_deg < 1.5
 
 
+def test_the_render_pastes_the_quadrant_the_descriptor_pinned(camera):
+    """A pinned paste rotation binds the oracle, not just the detector.
+
+    The 0907 descriptor records where each sticker actually sits on the printed
+    part, and the detector reads that as a measured fact: it does not search the
+    quarter turns for a pinned anchor.  A render that pasted at quadrant 0
+    anyway would put the marker somewhere the detector is not allowed to look,
+    and every synthetic comparison run on this descriptor would be scored
+    against a target that cannot be read -- silently, because such a pose still
+    solves and still reports success.  It was wrong by 150-370 mm.
+    """
+    pinned = HybridCarrierModel.from_json(
+        ROOT / "assets" / "models" / "hybrid_carrier_v1_20260907.json"
+    )
+    assert {int(a.marker_id): a.paste_quadrant for a in pinned.anchors} == {30: 3, 31: 3, 32: 2}
+    T_true = pose_from((20.0, -15.0, 35.0), (0.01, -0.02, 0.72))
+    image = render_carrier(pinned, camera, T_true, blur_sigma=0.8, noise_sigma=2.5, seed=3)
+    detection = detect_carrier(image, camera, pinned)
+    assert detection.success, detection.message
+    translation_mm, rotation_deg = pose_error(T_true, detection.T_base_rig)
+    assert translation_mm < 6.0
+    assert rotation_deg < 1.5
+    assert len(detection.measurements) > 40
+
+
 def test_painted_edges_beat_the_anchors_on_their_own(model, camera):
     """The whole premise of V1: the facets have to add pose, not just identity."""
     rng = np.random.default_rng(11)

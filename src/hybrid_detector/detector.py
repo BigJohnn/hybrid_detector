@@ -1339,6 +1339,12 @@ class PoseSolution:
     covariance: np.ndarray | None
     sigma_translation_m: float | None
     sigma_rotation_deg: float | None
+    # How wrong the assumed per-observation sigmas were, as a ratio of
+    # variances: 1.0 means the fit landed where 0.3 px corners and the edge
+    # contrast model said it would.  It is reported rather than hidden inside
+    # the covariance because a value far from 1 is a statement about the noise
+    # model, not about this pose.
+    variance_factor: float = float("nan")
     message: str = ""
 
 
@@ -1380,14 +1386,29 @@ def solve_carrier_pose(
     covariance = None
     sigma_t = None
     sigma_r = None
+    variance_factor = float("nan")
     jacobian = result.jac
     if jacobian is not None and jacobian.size and jacobian.shape[0] >= 6:
         try:
-            covariance = np.linalg.inv(jacobian.T @ jacobian)
+            normal_inverse = np.linalg.inv(jacobian.T @ jacobian)
+        except np.linalg.LinAlgError:
+            normal_inverse = None
+        if normal_inverse is not None:
+            # inv(J'J) is a covariance only if the sigmas the residuals were
+            # divided by were the right ones.  They are an assumption -- a flat
+            # 0.3 px for every anchor corner, a contrast model for every edge --
+            # and the fit itself prices that assumption: the robust cost per
+            # degree of freedom is the factor by which the assumed sigmas were
+            # wrong, and it is 1 when they were right.  Reporting inv(J'J) on
+            # its own reports the assumption and calls it a measurement.  On the
+            # 0909 bench capture the assumption was wrong by about 17 in
+            # variance, so every sigma this function used to return was roughly
+            # four times too small.
+            degrees_of_freedom = max(int(jacobian.shape[0]) - 6, 1)
+            variance_factor = float(2.0 * result.cost / degrees_of_freedom)
+            covariance = normal_inverse * variance_factor
             sigma_r = float(np.degrees(np.sqrt(max(np.trace(covariance[:3, :3]), 0.0))))
             sigma_t = float(np.sqrt(max(np.trace(covariance[3:, 3:]), 0.0)))
-        except np.linalg.LinAlgError:
-            covariance = None
     return PoseSolution(
         T_base_rig=T,
         anchor_rmse_px=float(np.sqrt(np.mean(np.square(anchor_errors))))
@@ -1401,6 +1422,7 @@ def solve_carrier_pose(
         covariance=covariance,
         sigma_translation_m=sigma_t,
         sigma_rotation_deg=sigma_r,
+        variance_factor=variance_factor,
         message="" if result.success else str(result.message),
     )
 
@@ -1511,7 +1533,13 @@ def estimate_build_scale(
     jacobian = result.jac
     if jacobian is not None and jacobian.size and jacobian.shape[0] > 8:
         try:
-            covariance = np.linalg.inv(jacobian.T @ jacobian)
+            # Scaled by the same a posteriori variance factor as the pose: a
+            # scale quoted to a part per million because the corner sigma was
+            # guessed low is a claim about the guess.
+            degrees_of_freedom = max(int(jacobian.shape[0]) - 8, 1)
+            covariance = np.linalg.inv(jacobian.T @ jacobian) * (
+                2.0 * result.cost / degrees_of_freedom
+            )
             body_sigma = float(np.sqrt(max(covariance[6, 6], 0.0))) * 1e6
             marker_sigma = float(np.sqrt(max(covariance[7, 7], 0.0))) * 1e6
         except np.linalg.LinAlgError:
@@ -2334,6 +2362,11 @@ def detect_carrier(
     anchor_free_min_facets: int = 2,
     anchor_free_trust_radius_m: float = 0.03,
     anchor_free_max_sigma_m: float = 0.004,
+    # How much worse than the best available a hypothesis may fit the decoded
+    # corners and still be offered to the colour scorer.  3.0 is where the two
+    # populations separate on the occlusion sweep: hypotheses that were right
+    # reached 2.63, hypotheses that were wrong started at 3.22.
+    max_anchor_rms_ratio: float = 3.0,
     seed: np.ndarray | None = None,
     seed_band_px: float = 5.0,
     seed_trust_radius_m: float = 0.05,
@@ -2536,6 +2569,39 @@ def detect_carrier(
             )
         )
     else:
+        if not anchor_free and len(seeds) > 1:
+            # The anchor-evidence floor.  Colour is allowed to choose between
+            # readings of this frame; it is not allowed to overturn the corners.
+            # A decoded sticker pins the pose through four corners whose
+            # positions are measured, and the planar four-point ambiguity
+            # produces a rival that fits them far worse -- so "far worse" is
+            # decidable without looking at the paint at all.  Without this,
+            # `10 * agreement + 100 * support` outvotes `-4 * reprojection` the
+            # moment the target is mostly hidden and the colour score stops
+            # meaning anything: at 60% occlusion the winning hypothesis fit the
+            # corners 3 to 12 times worse than the tightest one on six of seven
+            # failures, and the tightest one was right in all six.  Hypotheses
+            # that fit the corners comparably (up to 2.63x on frames that were
+            # already right) still go to the scorer, which is the tie-break
+            # colour exists for.
+            residuals = [
+                float(
+                    np.sqrt(
+                        np.mean(
+                            np.square(project_rig(camera, T, points) - uv),
+                        )
+                    )
+                )
+                for T, points, uv, _ in seeds
+            ]
+            admissible = max(min(residuals), 1e-6) * float(max_anchor_rms_ratio)
+            survivors = [
+                seed
+                for seed, residual in zip(seeds, residuals, strict=True)
+                if residual <= admissible
+            ]
+            if survivors:
+                seeds = survivors
         for T_cam_rig, object_points, image_points, quadrants in seeds:
             score, entry = _score_hypothesis(
                 image,
@@ -2710,6 +2776,7 @@ def detect_carrier(
                 anchor_free_min_facets=anchor_free_min_facets,
                 anchor_free_trust_radius_m=anchor_free_trust_radius_m,
                 anchor_free_max_sigma_m=anchor_free_max_sigma_m,
+                max_anchor_rms_ratio=max_anchor_rms_ratio,
                 seed=None,
             )
             again.reacquired = True

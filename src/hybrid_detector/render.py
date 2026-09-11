@@ -198,7 +198,21 @@ def render_carrier(
             image[visible] * (1.0 - alpha) + np.asarray(palette.border, dtype=np.float64) * alpha
         ).astype(np.uint8)
 
-    quadrants = paste_quadrants or {}
+    # A descriptor that pins where its sticker was pasted is stating a physical
+    # fact about the printed part, and the detector reads it as one: it does not
+    # search the quarter turns for a pinned anchor.  So an oracle render that
+    # ignored the pin would paste a sticker the detector is not allowed to find,
+    # and every pose measured against it would be wrong by a quarter turn of the
+    # pad.  A caller may still override, which is what the paste-rotation test does.
+    quadrants = (
+        dict(paste_quadrants)
+        if paste_quadrants is not None
+        else {
+            int(anchor.marker_id): int(anchor.paste_quadrant)
+            for anchor in model.anchors
+            if anchor.paste_quadrant is not None
+        }
+    )
     for anchor in model.anchors:
         cam = transform(T_cam_rig, anchor.marker_corners_m)
         if np.any(cam[:, 2] <= 1e-6):
