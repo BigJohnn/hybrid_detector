@@ -1,0 +1,2 @@
+# Preserve vendor STEP bytes; their generated headers contain trailing spaces.
+*.step -whitespace

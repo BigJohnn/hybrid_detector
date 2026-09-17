@@ -115,6 +115,13 @@ The reported position and rotation uncertainties this section used to quote
 they were never a substitute for external ground truth in the first place. See
 [docs/validation.md](docs/validation.md).
 
+## Paired real-capture evaluation
+
+Freeze inputs and compare anchor-only, colour-assisted, and full estimates on
+the same images and decoded corners. Failures remain in the denominator;
+held-out camera residuals are reported as consistency, never ground truth.
+See [the pilot protocol](docs/real_capture_pilot.md) for commands and the capture manifest.
+
 ## Citation and license
 
 `CITATION.cff` intentionally contains author and repository placeholders.

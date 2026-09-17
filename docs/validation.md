@@ -1,5 +1,16 @@
 # Validation status
 
+## Current-code audit (2026-09-11)
+
+The historical tables below have not been regenerated in the new capture evaluator.
+Current `detect_carrier` already filters competing anchor hypotheses using
+`max_anchor_rms_ratio=3.0`; statements below that this floor is unimplemented
+are historical and no longer describe the complete current code. This does not
+validate the threshold on unseen real data, or extend the edge-refinement
+rank/trust/sigma gates to the anchored path. Follow the
+[paired real-capture pilot protocol](real_capture_pilot.md) to freeze the actual
+source and assess it without sharing pose estimates across methods.
+
 ## 2026-09-09 bench capture
 
 Seven calibrated fisheye cameras observed the 0907 target. Two processable

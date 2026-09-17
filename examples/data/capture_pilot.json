@@ -1,0 +1,18 @@
+{
+  "schema": "hybrid_detector/capture_evaluation/v1",
+  "dataset_id": "included_cam14_smoke",
+  "purpose": "Pipeline smoke test only; one view without independent reference cannot establish gain.",
+  "world_frame": "cam14",
+  "model": "../../assets/models/hybrid_carrier_v1_20260907.json",
+  "cameras": {"cam14": "cam14_intrinsics.json"},
+  "detector": {"min_anchors": 1, "max_anchor_rms_ratio": 3.0},
+  "evaluation": {"translation_limit_mm": 10.0, "rotation_limit_deg": 2.0},
+  "frames": [
+    {
+      "id": "ep1_frame000000",
+      "group": "bench_20260909",
+      "condition": "included_example",
+      "views": {"cam14": {"image": "cam14_ep1_frame000000.jpg"}}
+    }
+  ]
+}

@@ -1,0 +1,1262 @@
+<title>混合靶标发表路线图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+
+<style>
+  /* ---- tokens: light (complete set declared here) ---- */
+  :root {
+    --paper:      #F2F3F0;
+    --surface:    #FBFBF9;
+    --ink:        #15181A;
+    --ink-soft:   #3D4442;
+    --muted:      #6A716E;
+    --line:       #D9DCD6;
+    --line-soft:  #E6E8E3;
+
+    /* the carrier's own facet paints, brought down to document weight */
+    --red:        #A93B2C;
+    --red-wash:   #F3E3DF;
+    --green:      #3D7A4F;
+    --green-wash: #E2EDE4;
+    --blue:       #2B5C89;
+    --blue-wash:  #E0E8F0;
+
+    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    --sans: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --cond: "IBM Plex Sans Condensed", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #131614;
+      --surface:    #1B1F1D;
+      --ink:        #E7E9E4;
+      --ink-soft:   #C3C8C3;
+      --muted:      #8E9691;
+      --line:       #2C322E;
+      --line-soft:  #232825;
+
+      --red:        #E27862;
+      --red-wash:   #2E1F1B;
+      --green:      #72B283;
+      --green-wash: #1A2620;
+      --blue:       #77A7D2;
+      --blue-wash:  #172430;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #131614;
+    --surface:    #1B1F1D;
+    --ink:        #E7E9E4;
+    --ink-soft:   #C3C8C3;
+    --muted:      #8E9691;
+    --line:       #2C322E;
+    --line-soft:  #232825;
+
+    --red:        #E27862;
+    --red-wash:   #2E1F1B;
+    --green:      #72B283;
+    --green-wash: #1A2620;
+    --blue:       #77A7D2;
+    --blue-wash:  #172430;
+  }
+
+  /* ---- base ---- */
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 56px 28px 120px;
+  }
+
+  .prose { max-width: 68ch; }
+
+  h1, h2, h3, h4 { font-family: var(--cond); font-weight: 600; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+
+  a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  code, .mono { font-family: var(--mono); font-size: 0.88em; font-variant-ligatures: none; }
+
+  .num { font-variant-numeric: tabular-nums; }
+
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---- masthead ---- */
+  .masthead { display: flex; flex-direction: column; gap: 18px; padding-bottom: 30px; border-bottom: 2px solid var(--ink); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 6px 18px;
+  }
+  .masthead h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.05; letter-spacing: -0.015em; }
+  .standfirst { font-size: 18px; line-height: 1.55; color: var(--ink-soft); max-width: 60ch; }
+
+  /* ---- section scaffolding ---- */
+  section { margin-top: 68px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 26px; }
+  .sec-head h2 { font-size: 25px; letter-spacing: -0.01em; }
+  .sec-mark { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
+  .sec-note { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .lede { font-size: 16px; color: var(--ink-soft); max-width: 66ch; margin-bottom: 26px; }
+
+  /* ---- hard constraints ---- */
+  .constraints { display: grid; gap: 1px; background: var(--line); border-block: 1px solid var(--line); }
+  .constraint { background: var(--paper); display: grid; grid-template-columns: 30px 1fr; gap: 18px; padding: 20px 0; }
+  .constraint-n { font-family: var(--mono); font-size: 13px; color: var(--red); font-weight: 500; padding-top: 3px; }
+  .constraint h3 { font-size: 17px; margin-bottom: 5px; }
+  .constraint p { color: var(--ink-soft); max-width: 64ch; }
+  .constraint .src { display: block; margin-top: 7px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+
+  .verdict {
+    margin-top: 26px; padding: 16px 20px; border-left: 3px solid var(--red);
+    background: var(--red-wash); font-size: 15.5px; max-width: 68ch;
+  }
+
+  /* ---- timeline ---- */
+  .timeline { margin: 8px 0 4px; overflow-x: auto; }
+  .timeline svg { display: block; min-width: 720px; width: 100%; height: auto; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-top: 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  /* ---- steps ---- */
+  .steps { display: flex; flex-direction: column; gap: 2px; }
+  .step {
+    display: grid; grid-template-columns: 76px 1fr; gap: 22px;
+    padding: 24px 22px 24px 0; border-top: 1px solid var(--line-soft);
+    position: relative;
+  }
+  .step::before {
+    content: ""; position: absolute; left: 0; top: -1px; bottom: 0; width: 3px; background: var(--muted);
+  }
+  .step[data-route="0"]::before { background: var(--red); }
+  .step[data-route="a"]::before { background: var(--blue); }
+  .step[data-route="b"]::before { background: var(--green); }
+
+  .rail { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-left: 16px; }
+  .step-id { font-family: var(--mono); font-weight: 500; font-size: 14px; letter-spacing: 0.04em; }
+  .step[data-route="0"] .step-id { color: var(--red); }
+  .step[data-route="a"] .step-id { color: var(--blue); }
+  .step[data-route="b"] .step-id { color: var(--green); }
+
+  .tick { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; font-family: var(--mono); font-size: 10.5px; color: var(--muted); letter-spacing: 0.06em; }
+  .tick input { width: 14px; height: 14px; accent-color: var(--blue); cursor: pointer; margin: 0; }
+
+  .step-body { min-width: 0; }
+  .step-body > h3 { font-size: 19px; letter-spacing: -0.005em; }
+  .when { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin: 5px 0 14px; letter-spacing: 0.03em; }
+  .flag {
+    display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 2px; margin-left: 8px;
+    background: var(--red-wash); color: var(--red); vertical-align: 2px;
+  }
+
+  .spec { display: grid; grid-template-columns: 62px 1fr; gap: 10px 18px; margin: 0; }
+  .spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+  .spec dd { margin: 0; color: var(--ink-soft); max-width: 62ch; }
+  .spec dd + dd { margin-top: 6px; }
+  .spec ul { margin: 0; padding-left: 18px; }
+  .spec li { margin-bottom: 4px; }
+  .spec li::marker { color: var(--muted); }
+
+  .gate-line { color: var(--ink); font-weight: 500; }
+
+  /* ---- measured results ---- */
+  .verdict.done { border-left-color: var(--green); background: var(--green-wash); }
+  .verdict.open { border-left-color: var(--blue); background: var(--blue-wash); }
+  .flag.ok { background: var(--green-wash); color: var(--green); }
+  .flag.neutral { background: var(--blue-wash); color: var(--blue); }
+  .res { border-collapse: collapse; font-family: var(--mono); font-size: 12px; margin-top: 4px; }
+  .res th, .res td { padding: 3px 0 3px 16px; text-align: right; font-variant-numeric: tabular-nums; }
+  .res th:first-child, .res td:first-child { padding-left: 0; text-align: left; }
+  .res thead th { color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); }
+  .res tbody tr + tr td { border-top: 1px solid var(--line-soft); }
+  .res .win { color: var(--green); }
+  .res .lose { color: var(--red); }
+  .scroller { overflow-x: auto; }
+
+  pre {
+    margin: 12px 0 4px; padding: 14px 16px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 4px;
+    overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.65; color: var(--ink-soft);
+  }
+  pre .cmt { color: var(--muted); }
+  pre .hl { color: var(--ink); font-weight: 500; }
+
+  /* ---- gate block ---- */
+  .gate { border: 1px solid var(--line); border-top: 3px solid var(--red); background: var(--surface); padding: 26px 28px; border-radius: 4px; }
+  .gate h3 { font-size: 21px; }
+  .gate > p { color: var(--ink-soft); margin: 8px 0 22px; max-width: 64ch; }
+  .outcomes { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+  .outcome { background: var(--surface); display: grid; grid-template-columns: 108px 1fr; gap: 20px; padding: 16px 18px; align-items: start; }
+  .outcome-key { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.05em; font-weight: 500; }
+  .outcome[data-to="a"] .outcome-key { color: var(--blue); }
+  .outcome[data-to="b"] .outcome-key { color: var(--green); }
+  .outcome[data-to="a2"] .outcome-key { color: var(--blue); }
+  .outcome p { color: var(--ink-soft); max-width: 60ch; }
+  .outcome strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  thead th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400; background: var(--surface); border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.venue { font-weight: 600; white-space: nowrap; }
+  td.why { color: var(--ink-soft); }
+  .tier { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; }
+  .rec { color: var(--blue); font-weight: 600; }
+  .avoid { color: var(--red); }
+
+  /* ---- closing dials ---- */
+  .dials { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .dial { background: var(--surface); padding: 20px; }
+  .dial-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .dial-now { font-family: var(--cond); font-size: 30px; font-weight: 700; line-height: 1.15; margin-top: 6px; letter-spacing: -0.01em; }
+  .dial-target { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .dial p { font-size: 13.5px; color: var(--ink-soft); margin-top: 10px; }
+  .dial[data-tone="bad"] .dial-now { color: var(--red); }
+  .dial[data-tone="unknown"] .dial-now { color: var(--muted); }
+
+  footer { margin-top: 76px; padding-top: 22px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 24px; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 40px 18px 90px; }
+    .step { grid-template-columns: 1fr; gap: 14px; padding-left: 0; }
+    .rail { flex-direction: row; align-items: center; gap: 16px; }
+    .spec { grid-template-columns: 1fr; gap: 4px 0; }
+    .spec dt { padding-top: 10px; }
+    .outcome { grid-template-columns: 1fr; gap: 6px; }
+    .constraint { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Hybrid Carrier · 6-DoF</span>
+      <span>2026-09-10 · 阶段 0 已执行</span>
+      <span>基线提交 d2648b1</span>
+      <span>内部 · 未公开</span>
+    </div>
+    <h1>混合靶标发表路线图</h1>
+    <p class="standfirst">
+      从一个<strong>尚未证实的科学主张</strong>，走到<strong>已递交优先权 + 已投稿</strong>。
+      十四周，一个决定性的分叉点，两条互斥的出路。
+    </p>
+    <p class="verdict done">
+      <strong>G1 已判定：走路线 A。</strong>
+      远距大倾角工况下 p90 降低 <span class="num">68.6%</span>（19.10 mm vs 60.75 mm），solved 数不降；
+      半遮挡工况 p90 降低 <span class="num">65%</span> 且 solved 数反升。预先声明的门槛是 30%。
+      同时阶段 0 翻出两件原路线图没有的事：合成对照的渲染器本身是坏的（已修），
+      以及重遮挡下<strong>颜色证据会盖过锚点几何</strong>——后者是路线 A 开工前必须先解决的。
+    </p>
+  </header>
+
+  <!-- ============ 硬约束 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§0</span>
+      <h2>为什么是这个顺序</h2>
+      <span class="sec-note">四条约束生成整个计划</span>
+    </div>
+    <p class="lede">
+      这份路线图的排序不是偏好，是被下面几件事逼出来的。任何绕过它们的排法都会在某一步撞墙。
+      前三条是开工时的判断；第四条是阶段 0 跑完之后才知道的，而它现在是最靠前的阻塞项。
+    </p>
+
+    <div class="constraints">
+      <div class="constraint">
+        <span class="constraint-n">01</span>
+        <div>
+          <h3>核心增益尚未证实 <span class="flag ok">已解除</span></h3>
+          <p>
+            原判断：仓库自述 facet refinement 相对 anchor BA 只移动 <span class="num mono">&lt; 0.05 mm</span>，
+            而唯一断言"边胜过锚点"的测试用<strong>单视图粗 PnP</strong> 当基线（还取离真值最近的候选），门槛过低。
+            <strong>T0.1 推翻了这个担心。</strong>用同体去漆做基线，一台相机、60 个位姿、同一批噪声：
+          </p>
+          <div class="scroller"><table class="res">
+            <thead><tr><th>工况</th><th>painted</th><th>plain</th><th>rig</th><th>p90 变化</th></tr></thead>
+            <tbody>
+              <tr><td>0.9–2.2 m / 50° 倾角 · p90</td><td>19.10</td><td>60.75</td><td>46.95</td><td class="win">−68.6%</td></tr>
+              <tr><td>30% 遮挡 · p90</td><td>2.92</td><td>8.53</td><td>9.48</td><td class="win">−65.8%</td></tr>
+              <tr><td>50% 遮挡 + anchor-free · p90</td><td>5.13</td><td>14.78</td><td>18.90</td><td class="win">−65.3%</td></tr>
+              <tr><td>60% 遮挡 · p90</td><td>50.40</td><td>14.52</td><td>38.29</td><td class="lose">+247%</td></tr>
+            </tbody>
+          </table></div>
+          <p style="margin-top:10px">
+            单位 mm。中位数在<em>所有</em>工况都更好，60% 遮挡也是（2.35 vs 6.05）——翻掉的只有尾部，
+            原因见第 04 条。
+          </p>
+          <span class="src">docs/validation.md · outputs/ab/*.json · compare_targets.py</span>
+        </div>
+      </div>
+
+      <div class="constraint">
+        <span class="constraint-n">02</span>
+        <div>
+          <h3>没有一般性宽限期</h3>
+          <p>
+            中国专利法第 24 条只给三种特定情形（指定展会、指定学术会议、他人未经同意泄露），
+            不是通用的六个月缓冲。<strong>任何公开先于申请日即摧毁新颖性</strong>——
+            包括预印本、演示视频、开源仓库、甚至发给外部的 PDF。
+            因此申请必须排在所有实验之前，而不是之后。
+          </p>
+          <span class="src">CNIPA Art. 22–25 · docs/ip_and_publication.md</span>
+        </div>
+      </div>
+
+      <div class="constraint">
+        <span class="constraint-n">03</span>
+        <div>
+          <h3>不确定度被系统性低估 <span class="flag neutral">部分修复</span></h3>
+          <p>
+            协方差取 <code>inv(JᵀJ)</code>，残差按假设 <code>anchor_sigma_px = 0.3</code> 归一化——
+            数学上成立，但前提是那个 σ 是对的。实测中位重投影 RMSE <span class="num">1.261 px</span>
+            意味着 χ²/dof ≈ <span class="num">17.6</span>，σ 应放大约 <span class="num">4.2×</span>。
+            <strong>A1 已把方差因子 <code>2·cost/dof</code> 乘进协方差</strong>，并把它作为
+            <code>variance_factor</code> 暴露出来；README 上那两个 σ 已撤稿。
+          </p>
+          <p style="margin-top:8px">
+            但只修了一半。方差因子能给<em>噪声尺度</em>定价，给不了<em>独立性</em>定价：
+            198 个边样本散布在约 15 条物理边界上，远不是 198 次独立观测。合成真值上
+            <code>|dt|/σ</code> 仍是 <span class="num">1.98</span>（近）/ <span class="num">2.37</span>（远），
+            标定良好应在 0.9 附近。<strong>剩下这 2× 要靠相关性建模，不能再靠残差自我申报。</strong>
+          </p>
+          <span class="src">detector.py:1386–1410 · docs/validation.md · README.md</span>
+        </div>
+      </div>
+
+      <div class="constraint">
+        <span class="constraint-n">04</span>
+        <div>
+          <h3>重遮挡下颜色会盖过锚点几何 <span class="flag">新 · 阻塞 A</span></h3>
+          <p>
+            60% 遮挡时 37 帧里有 7 帧错到 15 mm 以上，看上去像"边样本太少把位姿拽偏了"。
+            <strong>不是。</strong>决定性的一帧是 pose 26：涂装模型找到 <span class="num">0</span> 条边，
+            仍然错 <span class="num">67.86 mm</span>；同一张图用去漆模型读，错
+            <span class="num">2.38 mm</span>。没有边，两边都是纯锚点解，区别只剩<em>哪个 PnP 假设胜出</em>。
+          </p>
+          <p style="margin-top:8px">
+            pose 39 是 145.67 mm vs 纯锚点 2.93 mm；胜出假设的锚点方差因子是
+            <span class="num">21.4</span>（≈1.4 px RMS，假设值 0.3 px），而纯锚点管线的胜出假设是 1.37。
+            即：<strong>在一个大部分被挡住的靶标上算出来的颜色分，压过了拟合良好的角点，
+            选错了单锚点位姿二义性的分支</strong>，随后边细化忠实地把错答案打磨得更精确。
+          </p>
+          <p style="margin-top:8px">
+            连带查出：<code>edge_constraints_span_the_pose</code>、信任半径、σ 准入
+            三道闸门<strong>全部只在 <code>if anchor_free:</code> 里</strong>——解出一个锚点，
+            边拟合就无条件通过。行 2258 的注释声称这些闸门"依然生效"，与代码不符。
+          </p>
+          <span class="src">detector.py:2288–2310 · docs/validation.md</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="verdict">
+      <strong>由此定序：</strong>申请先行（锁死时间，与实验并行）→ 增益判定先于一切实验投入（已完成，通过）→
+      <strong>证据层级修复先于外部真值</strong>（拿真值去测一个会选错分支的估计器，测的是选择而不是精度）→
+      协方差修正先于一切对比（已完成一半）。
+    </p>
+  </section>
+
+  <!-- ============ 时间轴 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§1</span>
+      <h2>十四周总览</h2>
+      <span class="sec-note">路线 A 与 B 互斥</span>
+    </div>
+
+    <div class="timeline">
+      <svg viewBox="0 0 1000 248" role="img" aria-label="十四周时间轴：第一到第二周为判定期，第二周末为 G1 分叉门，之后分为路线 A（第三到十四周）与路线 B（第三到八周）">
+        <!-- week guides -->
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="40" y1="40" x2="40" y2="206"></line>
+          <line x1="302.9" y1="40" x2="302.9" y2="206"></line>
+          <line x1="434.3" y1="40" x2="434.3" y2="206"></line>
+          <line x1="565.7" y1="40" x2="565.7" y2="206"></line>
+          <line x1="697.1" y1="40" x2="697.1" y2="206"></line>
+          <line x1="828.6" y1="40" x2="828.6" y2="206"></line>
+          <line x1="960" y1="40" x2="960" y2="206"></line>
+        </g>
+
+        <!-- lane 0 -->
+        <text x="40" y="40" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.06em">阶段 0 · 判定期</text>
+        <rect x="40" y="50" width="131.4" height="28" rx="3" fill="var(--red)"></rect>
+        <text x="52" y="69" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="500">T0.1–T0.3</text>
+
+        <!-- G1 gate -->
+        <line x1="171.4" y1="32" x2="171.4" y2="206" stroke="var(--red)" stroke-width="1.5" stroke-dasharray="4 3"></line>
+        <text x="177" y="30" fill="var(--red)" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500">G1 分叉</text>
+
+        <!-- lane A -->
+        <text x="185" y="106" fill="var(--blue)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.06em">路线 A · 测量论文（增益成立）</text>
+        <rect x="171.4" y="116" width="130" height="28" rx="3" fill="var(--blue)" opacity="0.55"></rect>
+        <rect x="303.9" y="116" width="260.8" height="28" rx="3" fill="var(--blue)"></rect>
+        <rect x="566.7" y="116" width="260.8" height="28" rx="3" fill="var(--blue)" opacity="0.78"></rect>
+        <rect x="829.6" y="116" width="130.4" height="28" rx="3" fill="var(--blue)" opacity="0.55"></rect>
+        <text x="181" y="135" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">A0–A2 复核</text>
+        <text x="314" y="135" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">A3 外部真值</text>
+        <text x="577" y="135" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">A4–A7 对照与消融</text>
+        <text x="840" y="135" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">A8 成稿</text>
+
+        <!-- lane B -->
+        <text x="185" y="166" fill="var(--green)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="0.06em">路线 B · 基准方法论论文（增益不成立）</text>
+        <rect x="171.4" y="176" width="196.2" height="28" rx="3" fill="var(--green)"></rect>
+        <rect x="368.6" y="176" width="130.4" height="28" rx="3" fill="var(--green)" opacity="0.78"></rect>
+        <rect x="500" y="176" width="65.7" height="28" rx="3" fill="var(--green)" opacity="0.55"></rect>
+        <text x="181" y="195" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">B1–B2 基准化</text>
+        <text x="379" y="195" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">B3 收录靶标</text>
+        <text x="509" y="195" fill="var(--paper)" font-family="IBM Plex Mono, monospace" font-size="10.5">B4 成稿</text>
+
+        <!-- week axis -->
+        <line x1="40" y1="218" x2="960" y2="218" stroke="var(--line)" stroke-width="1"></line>
+        <g fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="10.5">
+          <text x="40" y="236">W1</text>
+          <text x="171.4" y="236">W3</text>
+          <text x="302.9" y="236">W5</text>
+          <text x="434.3" y="236">W7</text>
+          <text x="565.7" y="236">W9</text>
+          <text x="697.1" y="236">W11</text>
+          <text x="828.6" y="236">W13</text>
+          <text x="936" y="236">W15</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch" style="background: var(--red)"></i>阻断性 · 可取消课题</span>
+      <span><i class="swatch" style="background: var(--blue)"></i>路线 A · 测量论文</span>
+      <span><i class="swatch" style="background: var(--green)"></i>路线 B · 基准方法论论文</span>
+      <span>配色取自靶标自身的 red / green / blue facet 涂装</span>
+    </div>
+  </section>
+
+  <!-- ============ 阶段 0 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§2</span>
+      <h2>阶段 0 · 判定期</h2>
+      <span class="sec-note">第 1–2 周 · 三线并行</span>
+    </div>
+    <p class="lede">
+      这两周只有一个目的：<strong>用最小成本判断这个课题是否成立</strong>，同时把申请日锁死。
+      三条线互不阻塞，可以同时开工。
+    </p>
+
+    <div class="steps">
+
+      <article class="step" data-route="0">
+        <div class="rail">
+          <span class="step-id">T0.1</span>
+          <label class="tick"><input type="checkbox" data-task="t01" checked><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>增益扫描<span class="flag ok">已完成 · 通过</span></h3>
+          <p class="when">2026-09-10 执行 · 纯合成、零硬件成本</p>
+          <p class="verdict done" style="margin:0 0 16px">
+            <strong>结论：增益成立，且不止一个域。</strong>
+            远距大倾角 p90 <span class="num">19.10 mm</span> vs 去漆 <span class="num">60.75 mm</span>（−68.6%，solved 60/60 不变）；
+            50% 遮挡 + anchor-free p90 <span class="num">5.13</span> vs <span class="num">14.78</span>（−65%，solved 55 vs 53，反而更多）。
+            <br><strong>但先修好渲染器再信任何合成数字：</strong>
+            <code>render_carrier</code> 原本把每张 ArUco 一律贴在 quadrant 0，而 0907 描述符把
+            <code>paste_quadrant</code> 钉死在 3/3/2，检测器又按钉死值读、不搜索——
+            渲染器把码贴在了检测器<em>不被允许去看</em>的地方。误差 150–370 mm、48–142°，
+            <strong>而且照样 <code>success=True</code></strong>。0904 描述符不钉 quadrant，整个测试套件用的都是 0904，
+            所以从来没有暴露。真实采集不受影响。已修，并补了一条没有该修复就差 280 mm 的回归测试。
+          </p>
+          <dl class="spec">
+            <div>
+              <dt>目的</dt>
+              <dd>找出彩色 facet 相对<strong>同体去漆</strong>基线真正获胜的操作域。找不到，路线 A 取消。</dd>
+            </div>
+            <div>
+              <dt>关键</dt>
+              <dd>
+                基线必须是<strong>同一个体、剥掉漆</strong>，不是另一个靶标——否则比的是几何不是漆。
+                注意 <code>--strip-paint</code> 是<em>就地修改</em>指定的 <code>--target</code>，不会额外生成一行，
+                所以同一个模型文件要用两个 label 传两次。
+              </dd>
+            </div>
+            <div>
+              <dt>动作</dt>
+              <dd>
+                四组扫描，共用同一批位姿、同一相机、同一噪声（<code>--seed 7</code> 固定）：
+                <pre><span class="cmt"># 公共前缀：同体配对 + 真实锚点布局做第三方参照</span>
+M=assets/models/hybrid_carrier_v1_20260907.json
+L=assets/models/hybrid_carrier_v1_20260907_marker_layout.json
+BASE="--target painted=$M --target plain=$M <span class="hl">--strip-paint plain</span> \
+      --layout rig=$L --poses 60 --seed 7"
+
+<span class="cmt"># a) 遮挡扫描 —— 信息分散在 31 条边 vs 集中在 3 个锚点</span>
+python -m hybrid_detector.cli.compare_targets $BASE \
+  <span class="hl">--obstruction-sweep 0 0.15 0.30 0.45 0.60</span> \
+  --out outputs/ab/obstruction.json
+
+<span class="cmt"># b) 曝光拖影 —— 糊掉的锚点角点 vs 糊掉的漆边</span>
+python -m hybrid_detector.cli.compare_targets $BASE \
+  <span class="hl">--motion-sweep-mm 0 1 2 4 8</span> --motion-lever-mm 300 \
+  --out outputs/ab/motion.json
+
+<span class="cmt"># c) 远距离 + 大倾角 —— 锚点像素面积塌缩的regime</span>
+python -m hybrid_detector.cli.compare_targets $BASE \
+  <span class="hl">--distance-m 0.9 2.2 --tilt-deg 50</span> \
+  --out outputs/ab/range.json
+
+<span class="cmt"># d) 全锚点遮挡 —— 只有涂装靶标能作答，rig 直接失败</span>
+python -m hybrid_detector.cli.compare_targets $BASE \
+  <span class="hl">--allow-anchor-free --obstruction-sweep 0.5 0.7</span> \
+  --out outputs/ab/anchorfree.json</pre>
+              </dd>
+            </div>
+            <div>
+              <dt>判据</dt>
+              <dd class="gate-line">
+                <strong>预先声明，不许事后改：</strong>至少一个操作域里，<code>painted</code> 相对 <code>plain</code>
+                的 <code>p90</code>（|dt| 90 分位，mm）降低 <span class="num">≥ 30%</span>，且 <code>n</code>（solved 数）不下降。
+                输出表列名即 <code>n fail p50 p90 max drot anc edge</code>。
+              </dd>
+            </div>
+            <div>
+              <dt>警告</dt>
+              <dd>
+                这是理想针孔、无畸变、高斯噪声的合成渲染。它<strong>只能证伪，不能证实</strong>——
+                给的是"上界下的相对比"。通过了必须在 A2 用真实图像复现，才算数。
+              </dd>
+            </div>
+            <div>
+              <dt>交付</dt>
+              <dd>四个 JSON + 一张"增益 vs 工况"曲线图 + 一句话结论：赢在哪个域，赢多少。</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="0">
+        <div class="rail">
+          <span class="step-id">T0.2</span>
+          <label class="tick"><input type="checkbox" data-task="t02"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>递交优先权申请<span class="flag">时间锁</span></h3>
+          <p class="when">第 1–2 周 · <strong>不等 T0.1 的结果</strong></p>
+          <dl class="spec">
+            <div>
+              <dt>理由</dt>
+              <dd>
+                申请日越早越好，且 12 个月内可用本国优先权 / PCT 补交实验数据。
+                等实验做完再申请，等于白白让出一年，还要冒中途泄露的风险。
+              </dd>
+            </div>
+            <div>
+              <dt>落点</dt>
+              <dd>
+                <ul>
+                  <li><strong>独权候选 1（最强）：双尺度分解</strong>——把打印件整体缩放与贴纸出图缩放拆成两个参数，并且<em>只用前者</em>修正 TCP 原点。实测 1.6% vs 0.4%，只改贴纸即把每相机离散度减半。文献里几乎无人分开处理，且效果可量化。<code>detector.py:1409-1443</code></li>
+                  <li><strong>独权候选 2：可观测性准入</strong>——法向折叠到半周算张角、数不同 facet 平面，在<em>拟合前</em>拒绝退化的边约束集。<code>detector.py:2115</code></li>
+                  <li><strong>装置权项</strong>：载体几何——锚点面与承载彩色边界的 facet 的布置关系。好取证，但在先技术暴露面大。</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>策略</dt>
+              <dd>
+                方法权项在先技术风险小但<strong>侵权取证极难</strong>（别人在自己机器里跑，拿不到证据）；
+                装置权项好取证但易被多面标记体 / 手术器械标记的老专利打。
+                因此<strong>写进同一件申请</strong>，不要二选一。
+              </dd>
+            </div>
+            <div>
+              <dt>随案材料</dt>
+              <dd>CAD（STEP）、描述符 JSON、2026-09-09 台架原始数据、本仓库 git 历史、T0.3 的检索结果、打印件实测尺寸记录。</dd>
+            </div>
+            <div>
+              <dt>同时冻结</dt>
+              <dd>仓库保持私有、不加 license、盘点并记录所有既往披露（演示、邮件、客户交付、投稿）及其日期与保密条款、书面落定发明人与职务发明归属。</dd>
+            </div>
+            <div>
+              <dt>判据</dt>
+              <dd class="gate-line">拿到受理通知书与申请日。此前<strong>零对外披露</strong>。</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="0">
+        <div class="rail">
+          <span class="step-id">T0.3</span>
+          <label class="tick"><input type="checkbox" data-task="t03" checked><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>补检 MBT 一族在先技术</h3>
+          <p class="when">第 1–2 周 · 喂给 T0.2 的律师</p>
+          <dl class="spec">
+            <div>
+              <dt>问题</dt>
+              <dd>
+                现有自评只比了<strong>平面 fiducial</strong>（ChromaTag / STag / AR-HueCode / RUNE-Tag）。
+                但 method.md 第 3–6 步——粗位姿投影 CAD、沿投影法向一维搜索边界、点到线残差 + 鲁棒核联合优化——
+                <strong>就是 model-based 3D edge tracking 的标准配方</strong>，这一族一篇都没引。
+              </dd>
+            </div>
+            <div>
+              <dt>必补</dt>
+              <dd>
+                <ul>
+                  <li>Harris &amp; Stennett, <strong>RAPiD</strong> (1990) —— 法向一维搜索 + 点到线残差的源头</li>
+                  <li>Drummond &amp; Cipolla, TPAMI 2002 —— 鲁棒 M-estimator 版</li>
+                  <li>Comport / Marchand / Chaumette, TVCG 2006 —— <strong>ViSP MBT</strong>，至今仍是现成开源基线</li>
+                  <li>Petit / Marchand / Kanani, ICRA 2014 —— edge + keypoint + <strong>colour</strong> 联合，与第 3–5 步重合度最高</li>
+                  <li>Wuest et al., ISMAR 2005 —— 多假设自适应线跟踪</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>结论</dt>
+              <dd>
+                这不意味着不能发或不能申，而是<strong>新颖性落点必须从 "predict-project-test" 上移开</strong>——
+                那个结构 1990 年就有了。落点移到双尺度分解与可观测性准入。
+              </dd>
+            </div>
+            <div>
+              <dt>检索</dt>
+              <dd>CPC <code>G06T7/73</code>、<code>G06T7/246</code>、<code>G06V20/20</code>、<code>G06V10/44</code>；CN / US / EP / PCT 同族。</dd>
+            </div>
+            <div>
+              <dt>交付</dt>
+              <dd>逐要素比对表：每条在先技术 × 我方每个权项要素，标明"公开 / 未公开"。</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ G1 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§3</span>
+      <h2>门 G1 · 分叉</h2>
+      <span class="sec-note">第 2 周末</span>
+    </div>
+
+    <div class="gate">
+      <h3>T0.1 是否找到了增益域？<span class="flag ok">已判定 · 走 A</span></h3>
+      <p>
+        这是全图唯一一个能取消整条路线的判定。三种结果事前定好，现在结果出来了：
+        <strong>第一个出口</strong>——两个独立工况都超过 30% 门槛，而且不止 anchor-free 那一种。
+        下面三条保留原样，因为主张范围仍然只到实测到的地方为止。
+      </p>
+
+      <div class="outcomes">
+        <div class="outcome" data-to="a">
+          <span class="outcome-key">是 → 路线 A　✓ 实际落点</span>
+          <p>
+            <strong>至少一个域达到 p90 降低 ≥ 30%。</strong>
+            走测量论文。主张写成："在<em>该域</em>，涂装边界把位姿精度提升 X%"——
+            主张的范围就是实测到的范围，一寸都不要外扩。
+          </p>
+        </div>
+        <div class="outcome" data-to="a2">
+          <span class="outcome-key">仅 anchor-free 域 → 收窄的 A</span>
+          <p>
+            <strong>只在全锚点遮挡时获胜。</strong>仍走 A，但主张收窄为
+            <em>"锚点全部失效时的位姿续航"</em>——这其实是个干净漂亮的主张：
+            ArUco 方案在那里直接无解，不是差一点，是<strong>没有答案</strong>。0 → 有，比 30% 更好讲。
+          </p>
+        </div>
+        <div class="outcome" data-to="b">
+          <span class="outcome-key">否 → 路线 B</span>
+          <p>
+            <strong>任何域都没有显著增益。</strong>不要硬写检测器论文——审稿人会问"消融里 facet 那一行为什么没动"。
+            改投基准方法论：<code>compare_targets.py</code> 那套对比范式本身就是贡献，
+            而且<strong>成功率我判断反而更高</strong>。检测器降级为该基准的一个被测对象。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 路线 A ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§4</span>
+      <h2>路线 A · 测量论文</h2>
+      <span class="sec-note">第 3–14 周 · 目标 IEEE TIM / RA-L</span>
+    </div>
+    <p class="lede">
+      框成<strong>一件 6-DoF 位姿测量器具</strong>，不是一个 CV 算法。
+      误差源分解、不确定度、可溯源真值——这些在视觉会议是"工程细节"，在 TIM 是正文贡献。
+    </p>
+
+    <div class="steps">
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A0</span>
+          <label class="tick"><input type="checkbox" data-task="a0"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>定死证据层级<span class="flag">新 · 阻塞</span></h3>
+          <p class="when">第 3 周 · 阻塞 A3 之后的一切 · 这是一个设计决定，不是一个常数</p>
+          <dl class="spec">
+            <div><dt>问题</dt><dd>
+              见 §0 第 04 条：重遮挡下颜色分压过锚点几何，选错单锚点位姿二义性的分支。
+              这不是"边太少"，pose 26 在<strong>零条边</strong>的情况下就已经错 67.86 mm。
+            </dd></div>
+            <div><dt>要答的</dt><dd>
+              <strong>颜色证据在什么条件下有资格推翻已解码的角点？</strong>
+              我的意见是：永远不能单独推翻。假设排序应当有一条锚点证据地板——
+              胜出假设的锚点残差不得显著劣于同批次最好的那个——颜色只在锚点无法分辨时打破平局。
+              但这条写进代码就是论文里"证据契约"的核心，值得你自己拍板而不是我替你定。
+            </dd></div>
+            <div><dt>顺带</dt><dd>
+              把 <code>edge_constraints_span_the_pose</code>、信任半径、σ 准入
+              从 <code>if anchor_free:</code> 里搬出来，让有锚点的路径也过闸；失败时回退到纯锚点解、
+              而不是判帧失败。并修掉 <code>detector.py:2258</code> 那条与代码不符的注释。
+            </dd></div>
+            <div><dt>反面教材</dt><dd>
+              已经试过一版"σ 相对准入"（细化后 σ 不得大于纯锚点 σ）并<strong>回退了</strong>：
+              在同一个错假设上算出来的基线本身就差，细化确实让它变精确，闸门永远不触发。
+              离线看着有效，是因为那次比的是两条不同的管线——那不是检测器能对自己做的检验。
+            </dd></div>
+            <div><dt>判据</dt><dd class="gate-line">
+              60% 遮挡下 painted 的 p90 回到 plain 之下（当前 <span class="num">50.40</span> vs <span class="num">14.52</span>），
+              且远距工况的 −68.6% 增益不被削掉。两个条件必须同时成立。
+            </dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A1</span>
+          <label class="tick"><input type="checkbox" data-task="a1" checked><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>修协方差缩放<span class="flag neutral">已完成一半</span></h3>
+          <p class="when">2026-09-10 执行 · 剩下的一半是相关性，不是尺度</p>
+          <p class="verdict open" style="margin:0 0 16px">
+            方差因子 <code>2·cost/dof</code> 已乘进 <code>solve_carrier_pose</code> 与
+            <code>estimate_build_scale</code> 的协方差，<code>variance_factor</code> 已作为字段暴露。
+            合成数据上这个因子是 <span class="num">0.25–0.42</span>（渲染噪声比假设的干净，σ 反而缩小），
+            真实台架上按 1.261 px 推算接近 <span class="num">17</span>（σ 放大约 4×）。
+            <strong>但 <code>|dt|/σ</code> 仍是 2 左右</strong>：方差因子给不了独立性定价，
+            198 个边样本串在约 15 条边界上远不是 198 次独立观测。这 2× 得靠相关性模型。
+            <br>连带影响：<code>anchor_free_max_sigma_m = 0.004</code> 现在比的是一个被缩放过的 σ，
+            合成上闸门变松（solved 52→55），真实数据上会变紧约 4×。<strong>这个常数必须在真实数据上重标。</strong>
+          </p>
+          <dl class="spec">
+            <div><dt>动作</dt><dd>
+              在 <code>solve_carrier_pose</code>（<code>detector.py:1345</code>）里把 <code>inv(JᵀJ)</code>
+              乘上残差方差缩放 <code>s² = χ²/(m−6)</code>，并把 χ²/dof 一并写进 <code>PoseSolution</code> 与报告 JSON。
+            </dd></div>
+            <div><dt>顺带</dt><dd>
+              把 <code>anchor_sigma_px</code> 从假设值改为<strong>实测</strong>：拿静止序列的角点抖动标定它。
+              现在的 0.3 px 是个愿望。
+            </dd></div>
+            <div><dt>交付</dt><dd>更新 README 与 validation.md 的所有 σ 数字；标注旧值为未缩放。</dd></div>
+            <div><dt>判据</dt><dd class="gate-line">报告的 σ 与外部真值（A3）的实测误差<strong>同量级</strong>。差 4× 就是还没修对。</dd></div>
+            <div><dt>加分</dt><dd>把"我们发现自报不确定度低估 4×并修正"写进论文——审稿人吃这套，这是诚实性信号。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A2</span>
+          <label class="tick"><input type="checkbox" data-task="a2"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>真实图像上复现增益</h3>
+          <p class="when">第 3–4 周 · 依赖 T0.1 · 用已有台架数据，无需新硬件</p>
+          <dl class="spec">
+            <div><dt>目的</dt><dd>
+              合成扫描说了"哪个域该赢"，这一步验证真实光照、真实鱼眼畸变、真实印刷质量下它<strong>还赢不赢</strong>。
+              合成赢真实不赢，是这类工作最常见的死法。
+            </dd></div>
+            <div><dt>动作</dt><dd>
+              在 2026-09-09 的 2403 帧上，按 T0.1 找到的域切片重跑：按<strong>可用锚点数</strong>分层
+              （<code>anc</code>=1 / 2 / 3）、按<strong>入射角</strong>分层、人工遮挡若干相机。
+              每层都跑 <code>painted</code> vs <code>plain</code>（去漆）两条。
+            </dd></div>
+            <div><dt>注意</dt><dd>
+              per-camera 检测率跨度是 25.8%–87.0%，天然构成一个"锚点稀缺"梯度，不用另外造。
+            </dd></div>
+            <div><dt>判据</dt><dd class="gate-line">
+              真实数据上增益方向与合成一致，幅度不低于合成的一半。<strong>不一致就回 G1 重判。</strong>
+            </dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A3</span>
+          <label class="tick"><input type="checkbox" data-task="a3"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>外部真值</h3>
+          <p class="when">第 5–8 周 · 依赖 A1 + A2 · <strong>本路线唯一的重成本项</strong></p>
+          <dl class="spec">
+            <div><dt>为什么排这么后</dt><dd>
+              激光跟踪仪机时贵、排期长。先用 T0.1 + A2 确认值得花这笔钱，再花。
+            </dd></div>
+            <div><dt>三选一</dt><dd>
+              <ul>
+                <li><strong>激光跟踪仪</strong>（Leica AT960 / API）——最强，可溯源，~μm 级，贵</li>
+                <li><strong>高精度机器人重复定位</strong>——只给<em>重复性</em>不给<em>准确度</em>，便宜，够写一半</li>
+                <li><strong>三坐标测量机 + 精密转台</strong>——静态位姿网格，覆盖角度好，动态不行</li>
+              </ul>
+            </dd></div>
+            <div><dt>必做</dt><dd>
+              真值系与相机系的<strong>手眼配准</strong>本身有误差，必须单独报告其不确定度，
+              不能混进检测器误差里。这是审稿人第二个会问的问题。
+            </dd></div>
+            <div><dt>交付</dt><dd>平移误差（mm）与旋转误差（deg）的分布，不是重投影残差。附真值系统自身的不确定度预算。</dd></div>
+            <div><dt>判据</dt><dd class="gate-line">A1 修正后的自报 σ 落在实测误差的 <span class="num">0.5×–2×</span> 区间内。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A4</span>
+          <label class="tick"><input type="checkbox" data-task="a4"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>消融</h3>
+          <p class="when">第 9 周 · 依赖 A3</p>
+          <dl class="spec">
+            <div><dt>四条</dt><dd>
+              <ul>
+                <li><code>anchors-only</code> —— 多相机 BA，<strong>不是</strong>单视图粗 PnP（这是必须修掉的旧基线）</li>
+                <li><code>edges-only</code> —— 配 <code>--allow-anchor-free</code>，同时报告可观测性准入的拒绝率</li>
+                <li><code>anchors + colour gating</code> —— 隔离"颜色作为对应关系闸门"的贡献</li>
+                <li><code>full</code> —— anchors + colour + 亚像素边</li>
+              </ul>
+            </dd></div>
+            <div><dt>另加</dt><dd>
+              <strong>双尺度消融</strong>——单尺度 vs 双尺度拟合下的 socket 原点偏移。
+              这是最强权项的实验支撑，必须有一张独立的图。
+            </dd></div>
+            <div><dt>判据</dt><dd class="gate-line">每一行都能解释；没有哪个组件是"加了不动"的。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A5</span>
+          <label class="tick"><input type="checkbox" data-task="a5"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>基线对照</h3>
+          <p class="when">第 9–10 周 · 与 A4 并行</p>
+          <dl class="spec">
+            <div><dt>必须包含</dt><dd>
+              <ul>
+                <li>ArUco / <strong>AprilTag 3</strong> —— 同面积、同印刷质量，别拿劣质打印当陪衬</li>
+                <li><strong>ChArUco 板</strong> —— 面积匹配</li>
+                <li><strong>ViSP MBT</strong> —— <em>关键</em>。T0.3 那一族的现成实现，不比它，审稿人会替你比</li>
+                <li>可选：一个学习式位姿基线（如 CNOS / MegaPose 类），说明非学习方法的定位</li>
+              </ul>
+            </dd></div>
+            <div><dt>公平性</dt><dd>面积匹配、印刷匹配、标定匹配、算力预算匹配。任何一项不匹配都要在正文写明。</dd></div>
+            <div><dt>交付</dt><dd>误差 vs 工况的曲线族，外加运行时分布（中位 / P95 / 硬件型号）。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A6</span>
+          <label class="tick"><input type="checkbox" data-task="a6"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>跨条件稳健性</h3>
+          <p class="when">第 10–12 周</p>
+          <dl class="spec">
+            <div><dt>维度</dt><dd>
+              跨天（标定漂移）、跨光照（色温 / 强度 / 阴影）、跨打印批次、跨镜头、跨载体个体（至少 2 个物理件）、拆装重复性（socket 取下再装回）。
+            </dd></div>
+            <div><dt>重点</dt><dd>
+              <strong>跨光照是涂装靶标的软肋</strong>，也是审稿人最会攻击的点——颜色分类在色温漂移下还成立吗？
+              代码里颜色参考取自锚点黑白区（<code>colour_reference_from_anchors</code>），这是个好设计，
+              要把它<strong>作为卖点量化</strong>：给出"用锚点自参考 vs 用全局固定阈值"的对比。
+            </dd></div>
+            <div><dt>判据</dt><dd class="gate-line">冻结参数，不许每个条件单独调参。调了就要报告。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A7</span>
+          <label class="tick"><input type="checkbox" data-task="a7"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>失败案例与预注册</h3>
+          <p class="when">第 12 周</p>
+          <dl class="spec">
+            <div><dt>动作</dt><dd>
+              把 <code>detect_carrier</code> 已有的失败分类学（无锚点解码 / 无一致假设 / facet 不足 / 边样本不足 / 边几何欠约束 / 仅锚点解 / 联合解）
+              统计成一张分布表，配典型失败图。<strong>这套分类学是现成的资产，别浪费。</strong>
+            </dd></div>
+            <div><dt>预注册</dt><dd>
+              所有排除阈值、剔除规则、异常帧定义写进论文，且必须与 T0.1 事前声明的一致。
+              事后调阈值是这类论文最容易被抓的地方。
+            </dd></div>
+            <div><dt>交付</dt><dd>失败分布表 + 排除规则清单 + 统计区间（bootstrap CI，不是只给中位数）。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="a">
+        <div class="rail">
+          <span class="step-id">A8</span>
+          <label class="tick"><input type="checkbox" data-task="a8"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>成稿与投稿</h3>
+          <p class="when">第 13–14 周</p>
+          <dl class="spec">
+            <div><dt>叙事</dt><dd>
+              标题层面就是一件<strong>器具</strong>：co-designed 靶标 + 证据感知估计器 + 完整的不确定度契约。
+              不要写成"我们提出了一种新的 fiducial"。
+            </dd></div>
+            <div><dt>三个卖点</dt><dd>
+              <ul>
+                <li>双尺度分解（body vs marker）——误差源分解，TIM 的正中靶心</li>
+                <li>拟合前可观测性准入——拒绝退化解，而不是事后看残差</li>
+                <li>修正后的不确定度契约——自报 σ 与外部真值一致</li>
+              </ul>
+            </dd></div>
+            <div><dt>投</dt><dd>见 §6。首选 IEEE TIM；若要抢时间先投 RA-L。</dd></div>
+            <div><dt>放行</dt><dd class="gate-line">
+              <strong>投稿前最后一次确认：优先权申请已受理。</strong>预印本、代码开源、演示视频一律在此之后。
+            </dd></div>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ 路线 B ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§5</span>
+      <h2>路线 B · 基准方法论论文</h2>
+      <span class="sec-note">第 3–8 周 · 目标 ISMAR</span>
+    </div>
+    <p class="lede">
+      如果增益不成立，<strong>不要硬写检测器论文</strong>。把主张换成 <code>compare_targets.py</code> 里那套对比范式本身——
+      它解决的是一个真问题：<em>"两个不同的靶标，怎么才算公平地比过一次？"</em>
+      现有 fiducial 文献在这件事上相当粗糙，这是个真空。
+    </p>
+
+    <div class="steps">
+
+      <article class="step" data-route="b">
+        <div class="rail">
+          <span class="step-id">B1</span>
+          <label class="tick"><input type="checkbox" data-task="b1"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>把 harness 提成基准</h3>
+          <p class="when">第 3–5 周</p>
+          <dl class="spec">
+            <div><dt>动作</dt><dd>
+              从 CLI 抽出稳定的基准接口：固定位姿集、固定噪声模型、版本化的 schema
+              （已有 <code>hybrid_detector/fiducial_target_ab/v1</code>，是个好起点）、可复现的种子。
+            </dd></div>
+            <div><dt>补</dt><dd>把理想针孔换成可选的真实畸变模型，否则"合成即上界"的批评无法回应。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="b">
+        <div class="rail">
+          <span class="step-id">B2</span>
+          <label class="tick"><input type="checkbox" data-task="b2"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>错模型定价作为核心贡献</h3>
+          <p class="when">第 3–5 周 · 与 B1 并行</p>
+          <dl class="spec">
+            <div><dt>为什么这是核心</dt><dd>
+              <code>render[:detect]</code> ——<strong>用错的模型去解正确渲染的图</strong>——
+              把"几何误差值多少毫米"变成一个可测量的数，而不是用同一个模型渲染又检测、把问题定义掉。
+              据我所知这个做法在 fiducial 文献里没有被系统提出过。<strong>这一条比检测器本身更好发。</strong>
+            </dd></div>
+            <div><dt>展开</dt><dd>
+              系统地给几类几何误差定价：打印缩放误差、as-built vs 名义 CAD、贴纸旋转误差、
+              标定内参误差。每一类给出"误差量 → 位姿误差"的传递曲线。
+            </dd></div>
+            <div><dt>并入</dt><dd>双尺度分解在这里作为"错模型定价"的一个应用案例出现，不是独立主张。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="b">
+        <div class="rail">
+          <span class="step-id">B3</span>
+          <label class="tick"><input type="checkbox" data-task="b3"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>收录公开靶标</h3>
+          <p class="when">第 5–7 周</p>
+          <dl class="spec">
+            <div><dt>动作</dt><dd>
+              把 3–5 个公开靶标接进同一 harness：ArUco、AprilTag 3、ChArUco、STag、（可选）ChromaTag。
+              混合载体作为其中<strong>一个被测对象</strong>出现，不是主角。
+            </dd></div>
+            <div><dt>价值</dt><dd>
+              产出一张"遮挡 / 拖影 / 距离 / 倾角"四维下的靶标选型表——
+              这是一个所有做机器人视觉的人都想要、但现在没有的东西。
+            </dd></div>
+            <div><dt>交付</dt><dd>开源基准（<strong>在专利受理之后</strong>）+ 选型表 + 复现脚本。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="step" data-route="b">
+        <div class="rail">
+          <span class="step-id">B4</span>
+          <label class="tick"><input type="checkbox" data-task="b4"><span>DONE</span></label>
+        </div>
+        <div class="step-body">
+          <h3>成稿投 ISMAR</h3>
+          <p class="when">第 7–8 周</p>
+          <dl class="spec">
+            <div><dt>为什么 ISMAR</dt><dd>
+              fiducial marker 的老家。ChromaTag、STag、Wuest 的线都在那儿，审稿人最懂这个问题为什么重要。
+              TIM 也收，但 ISMAR 的读者更需要这张选型表。
+            </dd></div>
+            <div><dt>备选</dt><dd>IEEE TIM（框成"靶标测量性能的量化方法"）· IROS。</dd></div>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ 投稿去向 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§6</span>
+      <h2>投稿去向</h2>
+      <span class="sec-note">按匹配度，非按影响因子</span>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>档</th><th>去向</th><th>为什么</th><th>怎么框</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tier">一档</td>
+            <td class="venue rec">IEEE TIM</td>
+            <td class="why">首选。TIM 的口味就是"测量系统 + 不确定度分析 + 可溯源真值 + 误差源分解"。双尺度分解、χ²/dof、失败分类学、provenance 绑定，在 CV 会议是工程细节，在这里是正文贡献。</td>
+            <td class="why">一件 6-DoF 位姿测量器具</td>
+          </tr>
+          <tr>
+            <td class="tier">一档</td>
+            <td class="venue rec">IEEE RA-L</td>
+            <td class="why">滚动投稿、8 页、系统类友好、一轮约 2 个月。可挂 ICRA/IROS 宣讲。适合抢时间先占位。</td>
+            <td class="why">机器人 TCP / 宽基线位姿测量</td>
+          </tr>
+          <tr>
+            <td class="tier">二档</td>
+            <td class="venue">ISMAR</td>
+            <td class="why">fiducial marker 的发源社区（ChromaTag / STag / Wuest）。<strong>路线 B 的首选。</strong></td>
+            <td class="why">靶标设计 + 对比方法论</td>
+          </tr>
+          <tr>
+            <td class="tier">二档</td>
+            <td class="venue">IROS / ICRA</td>
+            <td class="why">fiducial 系统类论文的常规去处，接受度远高于顶级视觉会议。</td>
+            <td class="why">机器人感知系统</td>
+          </tr>
+          <tr>
+            <td class="tier">二档</td>
+            <td class="venue">TMech / RCIM</td>
+            <td class="why">若重心落在工业机器人标定应用而非视觉方法。</td>
+            <td class="why">工业机器人标定</td>
+          </tr>
+          <tr>
+            <td class="tier">三档</td>
+            <td class="venue">Measurement · IEEE Sensors J.</td>
+            <td class="why">比 TIM 低一档的稳妥退路，选题口味接近。</td>
+            <td class="why">同 TIM</td>
+          </tr>
+          <tr>
+            <td class="tier">三档</td>
+            <td class="venue">Sensors (MDPI)</td>
+            <td class="why">快、开放获取，但档次与口碑都低。只在需要抢时间时考虑。</td>
+            <td class="why">—</td>
+          </tr>
+          <tr>
+            <td class="tier">不建议</td>
+            <td class="venue avoid">CVPR / ICCV / ECCV</td>
+            <td class="why">非学习类 fiducial 论文近年基本进不去。ChromaTag 那个窗口（ICCV 2017）已经关了。</td>
+            <td class="why">—</td>
+          </tr>
+          <tr>
+            <td class="tier">不建议</td>
+            <td class="venue avoid">IEEE T-RO</td>
+            <td class="why">除非把可观测性准入做成真正的理论贡献（信息矩阵条件数的可证界、退化流形刻画），否则理论深度与实验量都不够。</td>
+            <td class="why">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 风险 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§7</span>
+      <h2>风险登记</h2>
+      <span class="sec-note">触发信号 → 应对</span>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>风险</th><th>触发信号</th><th>应对</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="venue">合成对照本身是坏的</td>
+            <td class="why">渲染器与检测器对同一个描述符的读法不一致</td>
+            <td class="why"><strong>已发生一次。</strong>贴纸 quadrant 那次错了 150–370 mm 还报 success，因为 render/detect 自洽而不正确。凡合成台架，必须至少有一条断言打在<em>外部已知</em>位姿上；每加一个描述符字段，先问渲染器认不认它。</td>
+          </tr>
+          <tr>
+            <td class="venue">颜色压过锚点</td>
+            <td class="why">遮挡加大时 painted 的尾部反超 plain</td>
+            <td class="why">已发生（60% 遮挡，p90 50.40 vs 14.52）。见 A0：假设排序要有锚点证据地板。<strong>论文里这条要主动写</strong>——它正好是"证据契约"主张的反例与修复，审稿人比你更容易想到它。</td>
+          </tr>
+          <tr>
+            <td class="venue">合成赢、真实不赢</td>
+            <td class="why">A2 的增益方向与 T0.1 不一致</td>
+            <td class="why">回 G1 重判。多半是真实印刷质量 / 光照把颜色闸门的优势吃掉了；先查 <code>colour_reference_from_anchors</code> 在该数据上的稳定性。</td>
+          </tr>
+          <tr>
+            <td class="venue">被 ViSP MBT 打平</td>
+            <td class="why">A5 中 ViSP 与 full 方法误差相当</td>
+            <td class="why">主张退到"免手工初始化 + 免逐场景调参 + 自带可观测性拒绝"，即<strong>工程可靠性</strong>而非精度。仍可发，但要换标题。</td>
+          </tr>
+          <tr>
+            <td class="venue">真值系统排不上期</td>
+            <td class="why">A3 超过第 8 周仍未开始</td>
+            <td class="why">退到"机器人重复定位 + 精密转台"，只声称重复性与相对精度，明确写出不声称绝对准确度。论文降一档投但不停摆。</td>
+          </tr>
+          <tr>
+            <td class="venue">专利被 EP2157545 / US9526587 挡住</td>
+            <td class="why">T0.3 的比对表显示装置权项要素被全覆盖</td>
+            <td class="why">放弃宽装置权项，集中到双尺度分解方法权项 —— 它与那两族的技术问题不同（制造偏差归因，非识别）。<strong>T0.3 已把更大的一族补进来：</strong>RAPiD 1990 / Drummond–Cipolla 2002 / ViSP 2006 / Petit 2014 / PWP3D，method.md 第 3–6 步整段是在先技术。</td>
+          </tr>
+          <tr>
+            <td class="venue">先公开后申请</td>
+            <td class="why">任何 demo / 预印本 / 开源早于受理日</td>
+            <td class="why"><strong>不可逆。</strong>因此 T0.2 排在最前，且 A8 / B4 有明确放行检查。全员知会：投稿、发视频、开仓库前先问申请日。</td>
+          </tr>
+          <tr>
+            <td class="venue">跨光照崩掉</td>
+            <td class="why">A6 中色温漂移导致 facet 分类失效</td>
+            <td class="why">这是涂装靶标的固有软肋。把锚点自参考的效果量化成正文卖点；若仍不稳，声明适用光照范围，写进 limitations。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 三个数字 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-mark">§8</span>
+      <h2>每周只看这三个数字</h2>
+      <span class="sec-note">其余都是过程</span>
+    </div>
+
+    <div class="dials">
+      <div class="dial" data-tone="unknown">
+        <div class="dial-label">增益</div>
+        <div class="dial-now">未测</div>
+        <div class="dial-target num">目标 p90 降低 ≥ 30%</div>
+        <p>painted 相对同体去漆基线，在 T0.1 找到的那个域上。这一个数字决定路线 A 是否存在。</p>
+      </div>
+      <div class="dial" data-tone="bad">
+        <div class="dial-label">σ 一致性</div>
+        <div class="dial-now num">≈ 4.2×</div>
+        <div class="dial-target num">目标 0.5×–2×</div>
+        <p>自报不确定度 ÷ 外部真值实测误差。当前由 χ²/dof ≈ 17.6 推得，尚无外部真值可对。</p>
+      </div>
+      <div class="dial" data-tone="unknown">
+        <div class="dial-label">申请日</div>
+        <div class="dial-now">未递交</div>
+        <div class="dial-target">阻断所有对外披露</div>
+        <p>拿到受理通知书之前，预印本、演示视频、开源仓库、外发 PDF 全部冻结。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>混合靶标发表路线图</span>
+    <span>2026-09-10</span>
+    <span>d2648b1</span>
+    <span>勾选状态仅存于本浏览器</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = "hybrid-roadmap-progress-v1";
+    var boxes = document.querySelectorAll(".tick input[data-task]");
+    var state = {};
+
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (raw) { state = JSON.parse(raw) || {}; }
+    } catch (e) { state = {}; }
+
+    function save() {
+      try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private mode */ }
+    }
+
+    Array.prototype.forEach.call(boxes, function (box) {
+      var id = box.getAttribute("data-task");
+      if (state[id]) { box.checked = true; }
+      box.addEventListener("change", function () {
+        state[id] = box.checked;
+        save();
+      });
+    });
+  })();
+</script>

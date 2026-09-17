@@ -31,6 +31,7 @@ hybrid-paint-step = "hybrid_detector.cli.paint_step:main"
 hybrid-export-layout = "hybrid_detector.cli.export_layout:main"
 hybrid-carrier-tcp = "hybrid_detector.cli.carrier_tcp:main"
 hybrid-compare-targets = "hybrid_detector.cli.compare_targets:main"
+hybrid-evaluate-capture = "hybrid_detector.cli.evaluate_capture:main"
 hybrid-render-install-guide = "hybrid_detector.cli.render_install_guide:main"
 
 [tool.setuptools]
